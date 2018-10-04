@@ -60,6 +60,17 @@
   color: #2d4474 !important;
 }
 
+/** Admin.php section **/
+.navigate {
+    margin: 1em;
+    padding: 2em 0;
+}
+
+
+
+
+/** Section End **/
+
 /** Chatroom **/
 .chatroom {
  
@@ -196,3 +207,4 @@
                 height: 100%;
                 overflow-y: scroll;
             }
+        
