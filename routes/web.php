@@ -11,10 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', 'hmsController@admin');
+    Route::get('/patient', 'HomeController@patient')->name('patient');
+    Route::get('/pharm', 'HomeController@pharm')->name('pharm');
 });
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
