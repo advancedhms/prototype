@@ -1,15 +1,30 @@
 <<?php
-include 'includes/class.admin.inc';
-session_start();
+function __autoload($class_name) {
+  include 'class.' . $class_name . '.inc';
+}
 
-  if(isset($_POST['submit'])) {
+  include 'includes/class.admin.inc';
+  session_start();
+  $userid = '';
+  $password = '';
+  $admin = new Admin($_SESSION['user_id']);
+
+  if(isset($_POST['submitPatient'])) {
     $userid = $_POST['patientID'];
     $password = $_POST['patientPassword'];
 
-    $admin = new Admin($_SESSION['user_id']);
     $patient = $admin->register_Patient($userid, $password);
     if($patient) {
       echo "<script> alert('Patient account successfully created'); </script>";
+    }
+  }
+  elseif (isset($_POST['submitDoctor'])) {
+    $userid = $_POST['doctorID'];
+    $password = $_POST['doctorPassword'];
+
+    $doctor = $admin->register_Doctor($user_id, $password);
+    if($doctor) {
+      echo "<script> alert('Doctor account successfully created'); </script>";
     }
   }
 
@@ -187,52 +202,28 @@ session_start();
 
                   <!--Doctor form-->
                   <div class="tab-pane fade" id="nav-doctor" role="tabpanel" aria-labelledby="nav-doctor-tab">
-                      <form>
-                          <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="inputEmail4">Email</label>
-                              <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="inputPassword4">Password</label>
-                              <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                            </div>
+                    <form action="admin.php" method="post">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="inputEmail4">UserID</label>
+                            <input type="text" name="doctorID" class="form-control" id="Patient" placeholder="Doctor ID">
                           </div>
-                          <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                          </div>
-                          <div class="form-group">
-                            <label for="inputAddress2">Address 2</label>
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                          </div>
-                          <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="inputCity">City</label>
-                              <input type="text" class="form-control" id="inputCity">
-                            </div>
-                            <div class="form-group col-md-4">
-                              <label for="inputState">State</label>
-                              <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                              </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                              <label for="inputZip">Zip</label>
-                              <input type="text" class="form-control" id="inputZip">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" id="gridCheck">
-                              <label class="form-check-label" for="gridCheck">
-                                Check me out
-                              </label>
-                            </div>
-                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="inputPassword4">Password</label>
+                            <div class="input-group mb-3" id="show_hide_password">
+                                <input type="password" name="doctorPassword" class="form-control" id="pass" placeholder="Password">
+                                <div class="input-group-append">
+                                    <a href="" class="btn btn-outline-secondary"><i class="fas fa-eye-slash" aria-hidden="true"></i></i></a>
 
-                        </form>
+                                </div>
+                              </div>
+
+                            <button type="button"onClick="generate()" class="btn btn-outline-success">Gen Password</button>
+                          </div>
+                          <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                        </div>
+
+                      </form>
                   </div>
 
                   <!--pharmacy form-->

@@ -108,9 +108,10 @@ class Admin extends User {
   public function register_Doctor($Doctor_id, $password) {
     $user = User::_checkCredentials($doctor_id, $password);
     if(!$user) {
-      $flag = Doctor::ValidateID($patient_id);
+      $flag = Doctor::ValidateID($doctor_id);
       if($flag) {
-        return User->Resister($user);
+        return User->Register($user);
+
       }
       else {
         $error_msg = "DoctorID does not exist in the system";

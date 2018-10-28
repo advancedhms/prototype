@@ -1,5 +1,8 @@
 <?php
-  include 'includes/class.user.inc';
+function __autoload($class_name) {
+include 'class.' . $class_name . '.inc';
+}
+
   $user = new User();
   if(isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
@@ -10,7 +13,7 @@
     if($userinfo) {
       if(preg_match('/pat$/', $userinfo)) {
         $_SESSION['user_id'] = $userinfo;
-        header('Location: patient.html');
+        header('Location: patient.php');
       }
       elseif (preg_match('/admin$/', $userinfo)) {
         $_SESSION['user_id'] = $userinfo;
