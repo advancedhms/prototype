@@ -1,3 +1,19 @@
+<<?php
+include 'includes/class.admin.inc';
+session_start();
+
+  if(isset($_POST['submit'])) {
+    $userid = $_POST['patientID'];
+    $password = $_POST['patientPassword'];
+
+    $admin = new Admin($_SESSION['user_id']);
+    $patient = $admin->register_Patient($userid, $password);
+    if($patient) {
+      echo "<script> alert('Patient account successfully created'); </script>";
+    }
+  }
+
+ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,7 +33,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand"
-          href="#">Navbar</a>
+          href="#">AHMS</a>
       <div class="collapse navbar-collapse justify-content-center"
           id="navbarNav">
         <ul class="navbar-nav pull-right">
@@ -61,7 +77,7 @@
     <section>
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Hello, Kwame!</h1>
+          <h1 class="display-4">Hello, <?php echo $_SESSION['user_id']; ?>!</h1>
           <p class="lead">This is your workspace for handling all administration in the Hospital.</p>
           <hr class="my-4">
           <p>Below is a recap on your recent interractions. Here you can monitor what goes in and out of your database</p>
@@ -100,7 +116,7 @@
     </div>
     <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand"
-          href="#">Navbar</a>
+          href="#">Ahms</a>
       <div class="collapse navbar-collapse justify-content-center"
           id="navbarNav">
         <ul class="navbar-nav nav-fill pull-right">
@@ -122,7 +138,7 @@
         </ul>
       </div>
     </nav>
-    
+
     <!--Modal Section-->
     <!--Register Form-->
     <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade" id="register" role="dialog"
@@ -145,26 +161,27 @@
                 <!--Patient Form-->
                 <div class="tab-content" id="nav-tabContent">
                   <div class="tab-pane fade show active" id="nav-patient" role="tabpanel" aria-labelledby="nav-patient-tab">
-                      <form>
+                      <form action="admin.php" method="post">
                           <div class="form-row">
                             <div class="form-group col-md-6">
-                              <label for="inputEmail4">Username</label>
-                              <input type="text" class="form-control" id="inputusername" placeholder="Username">
+                              <label for="inputEmail4">UserID</label>
+                              <input type="text" name="patientID" class="form-control" id="Patient" placeholder="Patient ID">
                             </div>
                             <div class="form-group col-md-6">
                               <label for="inputPassword4">Password</label>
                               <div class="input-group mb-3" id="show_hide_password">
-                                  <input type="password" class="form-control" id="pass" placeholder="Password">
+                                  <input type="password" name="patientPassword" class="form-control" id="pass" placeholder="Password">
                                   <div class="input-group-append">
                                       <a href="" class="btn btn-outline-secondary"><i class="fas fa-eye-slash" aria-hidden="true"></i></i></a>
-                                      
+
                                   </div>
                                 </div>
-                               
+
                               <button type="button"onClick="generate()" class="btn btn-outline-success">Gen Password</button>
                             </div>
+                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
                           </div>
-                          
+
                         </form>
                   </div>
 
@@ -214,7 +231,7 @@
                               </label>
                             </div>
                           </div>
-                          
+
                         </form>
                   </div>
 
@@ -232,29 +249,29 @@
                                   <input type="password" class="form-control" id="pass" placeholder="Password">
                                   <div class="input-group-append">
                                       <a href=""><i class="fas fa-eye" aria-hidden="true"></i></i></a>
-                                      
+
                                   </div>
                                 </div>
-                               
+
                               <button type="button"onClick="generate()" class="btn btn-outline-success">Gen Password</button>
                             </div>
                           </div>
-                         
+
                         </form>-->
                   </div>
                 </div>
-           
+
           </div>
           <div class="modal-footer">
-            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button> 
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+
           </div>
         </div>
       </div>
     </div>
-    <script src="js/jquery-3.3.1.slim.min.js"></script> 
-    <script src="js/popper.min.js"></script> 
-    <script src="js/bootstrap.min.js"></script> 
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

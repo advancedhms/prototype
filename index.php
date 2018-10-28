@@ -6,14 +6,18 @@
     $password = $_POST['password'];
     $error = " ";
     $userinfo = $user->login($user_id, $password);
+    session_start();
     if($userinfo) {
       if(preg_match('/pat$/', $userinfo)) {
+        $_SESSION['user_id'] = $userinfo;
         header('Location: patient.html');
       }
-      elseif (preg_match('/doc$/', $userinfo)) {
-        header('Location: admin.html');
+      elseif (preg_match('/admin$/', $userinfo)) {
+        $_SESSION['user_id'] = $userinfo;
+        header('Location: admin.php');
       }
       elseif (preg_match('/pharm$/', $userinfo)) {
+        $_SESSION['user_id'] = $userinfo;
         header('Location: pharm.html');
       }
 
