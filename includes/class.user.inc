@@ -30,7 +30,7 @@
     public function login($user_id, $password)
     {
         $this->_password = $password;
-        $user = $this->_checkCredentials($user_id, $password);
+        $user = self::checkCredentials($user_id, $password);
         if ($user) {
             $this->_user = $user; // store it so it can be accessed later
             $_SESSION['user_id'] = $user['userid'];
@@ -40,7 +40,7 @@
         return false;
     }
 
-    protected function _checkCredentials($user_id, $password)
+    final static function _checkCredentials($user_id, $password)
     {
       $db = $this->_db;
       $mysqli = $db->getConnection();

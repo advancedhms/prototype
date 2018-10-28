@@ -1,4 +1,26 @@
+<?php
+  include 'includes/class.user.inc';
+  $user = new User();
+  if(isset($_POST['submit'])) {
+    $user_id = $_POST['user_id'];
+    $password = $_POST['password'];
+    $error = " ";
+    $userinfo = $user->login($user_id, $password);
+    if($userinfo) {
+      if(preg_match('/pat/', $userinfo)) {
+        header('Location: patient.html');
+      }
+      elseif (preg_match('/doc/', $userinfo)) {
+        header('Location: admin.html');
+      }
 
+    }
+    else {
+      $error =  $user->error_message;
+    }
+
+    }
+    ?>
 <!doctype html>
 <html>
 <head>
@@ -11,24 +33,6 @@
 </head>
 
 <body>
-  <?php
-    include 'includes/class.user.inc';
-    $user = new User();
-    if(isset($_POST['submit'])) {
-      $user_id = $_POST['user_id'];
-      $password = $_POST['password'];
-      $error = " ";
-      $userinfo = $user->login($user_id, $password);
-      if($userinfo) {
-        echo "<script> alert('Login successful'); </script>";
-        header('Location: patient.html');
-      }
-      else {
-        $error =  $user->error_message;
-      }
-
-      }
-      ?>
     <div class="container">
       <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
