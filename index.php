@@ -12,7 +12,7 @@
 
 <body>
   <?php
-    include 'includes/user.class.php';
+    include 'includes/class.user.inc';
     $user = new User();
     if(isset($_POST['submit'])) {
       $user_id = $_POST['user_id'];
@@ -37,38 +37,84 @@
                Background image for card set in CSS!
             </div>-->
             <div class="card-body">
+              <nav>
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-Login-tab" data-toggle="tab" href="#nav-login" role="tab" aria-controls="nav-patient" aria-selected="true">Login</a>
+                    <a class="nav-item nav-link" id="nav-Register-tab" data-toggle="tab" href="#nav-register" role="tab" aria-controls="nav-doctor" aria-selected="false">Register</a>
+                  </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
+                    <span><?php echo $error; ?></span>
+                    <h5 class="card-title text-center">Login</h5>
+                    <form class="form-signin" method="post" action="index.php">
+                      <div class="form-label-group">
+                        <input type="text" name="user_id" id="userid" class="form-control" placeholder="Username" required autofocus>
+                        <label for="inputUserame">UserID</label>
+                      </div>
 
-              <span><?php echo $error; ?></span>
-              <h5 class="card-title text-center">Login</h5>
-              <form class="form-signin" method="post" action="index.php">
-                <div class="form-label-group">
-                  <input type="text" name="user_id" id="userid" class="form-control" placeholder="Username" required autofocus>
-                  <label for="inputUserame">UserID</label>
+                      <!--<div class="form-label-group">
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+                        <label for="inputEmail">Email address</label>
+                      </div>-->
+
+                      <hr>
+
+                      <div class="form-label-group">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                        <label for="inputPassword">Password</label>
+                      </div>
+
+                      <!--<div class="form-label-group">
+                        <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
+                        <label for="inputConfirmPassword">Confirm password</label>
+                      </div>-->
+
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" name="submit" type="submit">Submit</button>
+                      <!--<a class="d-block text-center mt-2 small" href="#">Sign In</a>-->
+                      <hr class="my-4">
+                      <!--<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
+                      <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>-->
+                    </form>
+                  </div>
+
+                  <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
+                    <span><?php echo $error; ?></span>
+                    <h5 class="card-title text-center">Register</h5>
+                    <form class="form-signin" method="post" action="index.php">
+                      <div class="form-label-group">
+                        <input type="text" name="user_id" id="userid" class="form-control" placeholder="Username" required autofocus>
+                        <label for="inputUserame">UserID</label>
+                      </div>
+
+                      <!--<div class="form-label-group">
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+                        <label for="inputEmail">Email address</label>
+                      </div>-->
+
+                      <hr>
+
+                      <div class="form-label-group">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                        <label for="inputPassword">Password</label>
+                      </div>
+
+                      <!--<div class="form-label-group">
+                        <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
+                        <label for="inputConfirmPassword">Confirm password</label>
+                      </div>-->
+
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" name="submit" type="submit">Submit</button>
+                      <!--<a class="d-block text-center mt-2 small" href="#">Sign In</a>-->
+                      <hr class="my-4">
+                      <!--<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
+                      <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>-->
+                    </form>
+                  </div>
                 </div>
 
-                <!--<div class="form-label-group">
-                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-                  <label for="inputEmail">Email address</label>
-                </div>-->
 
-                <hr>
 
-                <div class="form-label-group">
-                  <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-                  <label for="inputPassword">Password</label>
-                </div>
-
-                <!--<div class="form-label-group">
-                  <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
-                  <label for="inputConfirmPassword">Confirm password</label>
-                </div>-->
-
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" name="submit" type="submit">Submit</button>
-                <!--<a class="d-block text-center mt-2 small" href="#">Sign In</a>-->
-                <hr class="my-4">
-                <!--<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
-                <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>-->
-              </form>
             </div>
           </div>
         </div>
