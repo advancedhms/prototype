@@ -14,6 +14,7 @@ class Admin extends User {
   public function register_Patient($patient_id, $password) {
     $user = User::_checkCredentials($patient_id, $password);
     if(!$user) {
+      
       return User->Resister($user);
     }
     $error_msg = "Patient Account already exists";

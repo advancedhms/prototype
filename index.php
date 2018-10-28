@@ -7,11 +7,14 @@
     $error = " ";
     $userinfo = $user->login($user_id, $password);
     if($userinfo) {
-      if(preg_match('/pat/', $userinfo)) {
+      if(preg_match('/pat$/', $userinfo)) {
         header('Location: patient.html');
       }
-      elseif (preg_match('/doc/', $userinfo)) {
+      elseif (preg_match('/doc$/', $userinfo)) {
         header('Location: admin.html');
+      }
+      elseif (preg_match('/pharm$/', $userinfo)) {
+        header('Location: pharm.html');
       }
 
     }
