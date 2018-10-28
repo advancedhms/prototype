@@ -1,0 +1,84 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Advanced Hospital Management System</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link href="fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/other.css"/>
+
+</head>
+
+<body>
+  <?php
+    include 'includes/user.class.php';
+    $user = new User();
+    if(isset($_POST['submit'])) {
+      $user_id = $_POST['user_id'];
+      $password = $_POST['password'];
+      $error = " ";
+      $userinfo = $user->login($user_id, $password);
+      if($userinfo) {
+        echo "<script> alert('Login successful'); </script>";
+        header('Location: patient.html');
+      }
+      else {
+        $error =  $user->error_message;
+      }
+
+      }
+      ?>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+          <div class="card card-signin flex-row my-5">
+            <!--<div class="card-img-left d-none d-md-flex">
+               Background image for card set in CSS!
+            </div>-->
+            <div class="card-body">
+
+              <span><?php echo $error; ?></span>
+              <h5 class="card-title text-center">Login</h5>
+              <form class="form-signin" method="post" action="index.php">
+                <div class="form-label-group">
+                  <input type="text" name="user_id" id="userid" class="form-control" placeholder="Username" required autofocus>
+                  <label for="inputUserame">UserID</label>
+                </div>
+
+                <!--<div class="form-label-group">
+                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+                  <label for="inputEmail">Email address</label>
+                </div>-->
+
+                <hr>
+
+                <div class="form-label-group">
+                  <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                  <label for="inputPassword">Password</label>
+                </div>
+
+                <!--<div class="form-label-group">
+                  <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
+                  <label for="inputConfirmPassword">Confirm password</label>
+                </div>-->
+
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" name="submit" type="submit">Submit</button>
+                <!--<a class="d-block text-center mt-2 small" href="#">Sign In</a>-->
+                <hr class="my-4">
+                <!--<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
+                <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>-->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="js/jquery-3.3.1.slim.min.js" ></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js" ></script>
+    <script src="js/script.js" ></script>
+</body>
+</html>
