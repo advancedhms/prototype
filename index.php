@@ -1,5 +1,6 @@
 <?php
   include 'includes/class.user.inc';
+  include 'includes/register.php';
   $user = new User();
   if(isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
@@ -85,10 +86,15 @@
                   <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
                     <span><?php echo $error; ?></span>
                     <h5 class="card-title text-center">Register</h5>
-                    <form class="form-signin" method="post" action="index.php">
+                  <form class="form-signin" method="post" action="index.php">
+<div class="form-label-group">
+  <input type="text" name="user_id" id="userid" class="form-control" placeholder="name" required autofocus>
+  <label for="inputname">Fullname</label>
+</div>
+<hr>
                       <div class="form-label-group">
                         <input type="text" name="user_id" id="userid" class="form-control" placeholder="Username" required autofocus>
-                        <label for="inputUserame">UserID</label>
+                        <label for="inputUserame">Username</label>
                       </div>
 
                       <!--<div class="form-label-group">
@@ -99,6 +105,18 @@
                       <hr>
 
                       <div class="form-label-group">
+										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address"  required value="">
+                    <label for="inputEmail">Email address</label>
+                  </div>
+
+                  <hr>
+<div class="form-label-group">
+  <input type="ID" name="id" id="id" class="form-control" placeholder="Id" required>
+  <label for="inputPassword">Hospital ID</label>
+</div>
+<hr>
+
+                      <div class="form-label-group">
                         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                         <label for="inputPassword">Password</label>
                       </div>
@@ -107,6 +125,11 @@
                         <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
                         <label for="inputConfirmPassword">Confirm password</label>
                       </div>-->
+<hr>
+                      <div class="form-label-group">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                        <label for="inputPassword">Confirm Password</label>
+                      </div>
 
                       <button class="btn btn-lg btn-primary btn-block text-uppercase" name="submit" type="submit">Submit</button>
                       <!--<a class="d-block text-center mt-2 small" href="#">Sign In</a>-->
