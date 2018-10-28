@@ -6,7 +6,7 @@ class Admin {
   protected $user_id;
 
   public function register_Patient($doctor_id, $password) {
-
+    $db = Database::getInstance();
   }
 }
 
