@@ -93,7 +93,7 @@
 		 public static function login($patient_id,$password) {
 			$db = Database::getInstance();
 			$mysqli = $db->getConnection();
-			$sql = 'SELECT * from patient_info where patient_id = "'.$patient_id.'" ';
+			$sql = 'SELECT * from patient where patient_id = "'.$patient_id.'" ';
 			$result = $mysqli->query($sql);
 
 			if($result->num_rows == 0) {
@@ -113,6 +113,19 @@
 					}
 
 				}
+			}
+
+			public static ValidateID($patient_id) {
+				$db = Database::getInstance();
+				$mysqli = $db->getConnection();
+				$sql = 'SELECT * from patient where patient_id = "'.$patient_id.'" ';
+				$result = $mysqli->query($sql);
+
+				if($result->num_rows == 0) {
+					throw new ExceptionPatient('User does not exist', Patient::ERROR_NOT_FOUND);
+					return FALSE;
+				}
+				return TRUE;
 			}
 
 

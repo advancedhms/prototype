@@ -14,8 +14,13 @@ class Admin extends User {
   public function register_Patient($patient_id, $password) {
     $user = User::_checkCredentials($patient_id, $password);
     if(!$user) {
-      
-      return User->Resister($user);
+      $flag = Patient::ValidateID($patient_id);
+      if($flag) {
+        return User->Resister($user);
+      }
+      else {
+        $error_msg = "PatientID does not exist in the system";
+      }
     }
     $error_msg = "Patient Account already exists";
     return false;
@@ -24,7 +29,13 @@ class Admin extends User {
   public function register_Doctor($Doctor_id, $password) {
     $user = User::_checkCredentials($doctor_id, $password);
     if(!$user) {
-      return User->Register($user);
+      $flag = Doctor::ValidateID($patient_id);
+      if($flag) {
+        return User->Resister($user);
+      }
+      else {
+        $error_msg = "DoctorID does not exist in the system";
+      }
     }
     $error_msg = 'Doctor Account already exists';
     return false;
