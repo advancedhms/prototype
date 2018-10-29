@@ -4,8 +4,10 @@ function __autoload($class_name) {
 include 'class.' . $class_name . '.inc';
 }
 
+
   include 'includes/class.user.inc';
   include 'includes/register.php';
+
 
   $user = new User();
   if(isset($_POST['submit'])) {
@@ -33,6 +35,15 @@ include 'class.' . $class_name . '.inc';
       $error =  $user->error_message;
     }
 
+    }
+
+    if(isset($_POST['register'])) {
+      $data = array
+      ('name' =>$_POST['name'] ,
+      'email'=> $_POST['email'],
+
+     );
+     $$user->register($data);
     }
     ?>
 <!doctype html>
@@ -65,8 +76,6 @@ include 'class.' . $class_name . '.inc';
                   <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
                     <span><?php echo $error; ?></span>
                     <h5 class="card-title text-center">Login</h5>
-
-                    <!-- login form -->
                     <form class="form-signin" method="post" action="index.php">
                       <div class="form-label-group">
                         <input type="text" name="user_id" id="userid" class="form-control" placeholder="Username" required autofocus>
@@ -98,17 +107,15 @@ include 'class.' . $class_name . '.inc';
                     </form>
                   </div>
 
-                  <!-- Sign up form -->
-
                   <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
                     <span><?php echo $error; ?></span>
                     <h5 class="card-title text-center">Register</h5>
                   <form class="form-signin" method="post" action="index.php">
-                    <div class="form-label-group">
-                      <input type="text" name="user_id" id="userid" class="form-control" placeholder="name" required autofocus>
-                      <label for="inputname">Fullname</label>
-                    </div>
-                    <hr>
+<div class="form-label-group">
+  <input type="text" name="user_id" id="userid" class="form-control" placeholder="name" required autofocus>
+  <label for="inputname">Fullname</label>
+</div>
+<hr>
                       <div class="form-label-group">
                         <input type="text" name="user_id" id="userid" class="form-control" placeholder="Username" required autofocus>
                         <label for="inputUserame">Username</label>
@@ -127,11 +134,11 @@ include 'class.' . $class_name . '.inc';
                   </div>
 
                   <hr>
-                  <div class="form-label-group">
-                    <input type="ID" name="hospitalid" id="id" class="form-control" placeholder="HospitalID" required>
-                    <label for="inputPassword">Hospital ID</label>
-                  </div>
-                  <hr>
+<div class="form-label-group">
+  <input type="ID" name="id" id="id" class="form-control" placeholder="Id" required>
+  <label for="inputPassword">Hospital ID</label>
+</div>
+<hr>
 
                       <div class="form-label-group">
                         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>

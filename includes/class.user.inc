@@ -3,7 +3,6 @@
    *
    */
    include 'class.Database.inc';
-   require_once("formvalidator.php");
   class User
   {
 
@@ -18,10 +17,6 @@
     const ERROR1 = "User not found";
     const ERROR2 = "password incorrect";
     const ERROR3 = "userid incorrect";
-
-    const ERROR4 = "USER Exists";
-    const ERROR5 = "password too short";
-    const ERROR6 = "userid not defined";
 
     public $error_message = '';
 
@@ -70,26 +65,15 @@
         return false;
     }
 
-    public function Register()
-    {
-        if(!isset($_POST['submitted']))
-        {
-           return false;
-        }
-
-        $formvars = array();
-
-        if(!$this->ValidateRegistrationSubmission())
-        {
-            return false;
-        }
-      }
-
-
     public function getUser()
     {
         return $this->_user;
     }
+
+  /*  public function register($data = array()) {
+      $sql = "Insert into tablename values ('$data['email']','$data['password']')";
+      $mysqli->query($sql);
+    }*/
   }
 
  ?>
