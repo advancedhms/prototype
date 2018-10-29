@@ -28,7 +28,7 @@ if (isset($_POST['reg_user'])) {
 
   // first check the database to make sure
   // a user does not already exist with the same username and/or email
-  $user_check_query = "SELECT * FROM hms WHERE username='$username' OR email='$email' LIMIT 1";
+  $user_check_query = "SELECT * FROM Admin WHERE username='$username' OR email='$email' LIMIT 1";
   $result = mysqli_query($db, $user_check_query);
   $user = mysqli_fetch_assoc($result);
 
@@ -46,7 +46,7 @@ if (isset($_POST['reg_user'])) {
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO admin (fullname,username, email,hospitalid, password)
+  	$query = "INSERT INTO Admin (fullname,username, email,hospitalid, password)
   			  VALUES('$fullname','$username', '$email','$hospitalid' '$password')";
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
