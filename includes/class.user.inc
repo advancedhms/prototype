@@ -3,7 +3,7 @@
    *
    */
    include 'class.Database.inc';
-   include 'formvalidator.php';
+   require_once("formvalidator.php");
   class User
   {
 
@@ -84,7 +84,7 @@
             return false;
         }
       }
-    }
+
 
     public function getUser()
     {
