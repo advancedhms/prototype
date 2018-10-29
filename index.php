@@ -1,18 +1,32 @@
 <?php
+<<<<<<< HEAD
+function __autoload($class_name) {
+include 'class.' . $class_name . '.inc';
+}
+
+=======
   include 'includes/class.user.inc';
   include 'includes/register.php';
+>>>>>>> 16964e0402734c760b9d48ea4b1d69952b42b38c
   $user = new User();
   if(isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
     $password = $_POST['password'];
     $error = " ";
     $userinfo = $user->login($user_id, $password);
+    session_start();
     if($userinfo) {
-      if(preg_match('/pat/', $userinfo)) {
-        header('Location: patient.html');
+      if(preg_match('/pat$/', $userinfo)) {
+        $_SESSION['user_id'] = $userinfo;
+        header('Location: patient.php');
       }
-      elseif (preg_match('/doc/', $userinfo)) {
-        header('Location: admin.html');
+      elseif (preg_match('/admin$/', $userinfo)) {
+        $_SESSION['user_id'] = $userinfo;
+        header('Location: admin.php');
+      }
+      elseif (preg_match('/pharm$/', $userinfo)) {
+        $_SESSION['user_id'] = $userinfo;
+        header('Location: pharm.html');
       }
 
     }
