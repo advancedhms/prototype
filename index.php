@@ -35,6 +35,19 @@ include 'class.' . $class_name . '.inc';
     }
 
     }
+    if(isset($_POST['register'])) {
+      if(!$_POST['regpassword'] === $_POST['confirmPassword']) {
+        return false;
+      }
+      $data = array(
+        'id'=>$_POST['user_id'],
+        'name' => $_POST['name'],
+        'email' => $_POST['email'],
+        'hospitalid' => $_POST['hospitalid'],
+        'password' => $_POST['regpassword'],
+      );
+      $new_user = $user->register($data);
+    }
     ?>
 <!doctype html>
 <html>
@@ -63,6 +76,8 @@ include 'class.' . $class_name . '.inc';
                   </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
+
+                  <!-- Login Form -->
                   <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
                     <span><?php echo $error; ?></span>
                     <h5 class="card-title text-center">Login</h5>
@@ -97,24 +112,20 @@ include 'class.' . $class_name . '.inc';
                     </form>
                   </div>
 
+                  <!-- Register form -->
                   <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
                     <span><?php echo $error; ?></span>
                     <h5 class="card-title text-center">Register</h5>
                   <form class="form-signin" method="post" action="index.php">
-<div class="form-label-group">
-  <input type="text" name="user_id" id="userid" class="form-control" placeholder="name" required autofocus>
-  <label for="inputname">Fullname</label>
-</div>
-<hr>
+                    <div class="form-label-group">
+                      <input type="text" name="name" id="name" class="form-control" placeholder="Fullname" required autofocus>
+                      <label for="inputname">Fullname</label>
+                    </div>
+                  <hr>
                       <div class="form-label-group">
                         <input type="text" name="user_id" id="userid" class="form-control" placeholder="Username" required autofocus>
                         <label for="inputUserame">Username</label>
                       </div>
-
-                      <!--<div class="form-label-group">
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-                        <label for="inputEmail">Email address</label>
-                      </div>-->
 
                       <hr>
 
@@ -124,28 +135,25 @@ include 'class.' . $class_name . '.inc';
                   </div>
 
                   <hr>
-<div class="form-label-group">
-  <input type="ID" name="id" id="id" class="form-control" placeholder="Id" required>
-  <label for="inputPassword">Hospital ID</label>
-</div>
-<hr>
+                  <div class="form-label-group">
+                    <input type="ID" name="id" id="id" class="form-control" placeholder="Id" required>
+                    <label for="inputPassword">Hospital ID</label>
+                  </div>
+                  <hr>
 
                       <div class="form-label-group">
-                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                        <input type="password" name="regpassword" id="password" class="form-control" placeholder="Password" required>
                         <label for="inputPassword">Password</label>
                       </div>
 
-                      <!--<div class="form-label-group">
-                        <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
-                        <label for="inputConfirmPassword">Confirm password</label>
-                      </div>-->
-<hr>
+
+                      <hr>
                       <div class="form-label-group">
-                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-                        <label for="inputPassword">Confirm Password</label>
+                        <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Password" required>
+                        <label for="confirmPassword">Confirm Password</label>
                       </div>
 
-                      <button class="btn btn-lg btn-primary btn-block text-uppercase" name="submit" type="submit">Submit</button>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" name="register" type="submit">Submit</button>
                       <!--<a class="d-block text-center mt-2 small" href="#">Sign In</a>-->
                       <hr class="my-4">
                       <!--<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>

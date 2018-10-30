@@ -8,9 +8,12 @@
 
     protected $_email;    // using protected so they can be accessed
     protected $_password; // and overidden if necessary
-
+    protected $_id;
+    protected $_name;
+    protected $_hospitalid;
     protected $_db;       // stores the database handler
     protected $_user;     // stores the user data
+    protected $_time_created; // Stores the time the user was created
 
   	protected $errors = NULL; //array to hold all of the errors
     //Defining the various errors
@@ -63,6 +66,43 @@
           return false;
         }
         return false;
+    }
+
+    public function register($data = array()) {
+      $this->_time_created = time();
+      if(!is_array($data)) {
+        trigger_error('unable to construct class with: '.get_class($data));
+      }
+      if(count($data) > 0) {
+				foreach($data as $name => $value) {
+					if(in_array($name,array(
+						'id',
+						'name',
+            'email',
+						'hospitalid',
+						'password',
+
+					))) {
+						$name = '_'.$name;
+					}
+					$this->$name = $value;
+				}
+			}
+
+      if(Hospital::ValidateID($this->$_hospitalid)) {
+        $regdata = array(
+          'id'=>$this->_id,
+          'name'=$this->_name,
+          'email'=$this->_email,
+          'hospitalid'=$this->_hospitalid,
+      );
+        $this->_user = Admin->register($regdata);
+        if($this->_user) {
+          $mysqli = $this->_db->getConnection();
+          $sql = "Insert into users values ('$this->_id','$this->_password')";
+          $result = $mysqli->query($sql);
+        }
+      }
     }
 
     public function getUser()
