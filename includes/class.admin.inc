@@ -6,7 +6,8 @@ include 'class.Patient.inc';
 class Admin extends User {
   protected $username;
   protected $admin_id;
-
+  protected $email;
+  protected $hospitalid;
 
   public $error_msg = '';
 
@@ -32,6 +33,7 @@ class Admin extends User {
         $this->name = $value;
       }
     }
+    $this->save();
   }
 
   /**
@@ -39,7 +41,7 @@ class Admin extends User {
   *takes a property value and sets the value
   **/
   function __set($name, $value) {
-    if($name == 'patient_id') {
+    if($name == 'admin_id') {
       $this->$name = $value;
       return;
     }
@@ -128,6 +130,10 @@ class Admin extends User {
 
   public static function getInstance($data = array()) {
    return new Admin($data);
+ }
+
+ public function save() {
+   
  }
 
 

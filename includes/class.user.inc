@@ -91,18 +91,25 @@
 
       if(Hospital::ValidateID($this->$_hospitalid)) {
         $regdata = array(
-          'id'=>$this->_id,
-          'name'=$this->_name,
+          'admin_id'=>$this->_id,
+          'username'=$this->_name,
           'email'=$this->_email,
           'hospitalid'=$this->_hospitalid,
       );
-        $this->_user = Admin->register($regdata);
+        $this->_user = new Admin($regdata);
         if($this->_user) {
           $mysqli = $this->_db->getConnection();
           $sql = "Insert into users values ('$this->_id','$this->_password')";
           $result = $mysqli->query($sql);
+          if($row = $result->fetch_assoc()) {
+            $flag = "Account has been created";
+            return $flag;
+          }
+          return false;
         }
+        return false;
       }
+      return false;
     }
 
     public function getUser()
