@@ -10,12 +10,12 @@
     be useful - WITHOUT ANY WARRANTY; without even the
     implied warranty of MERCHANTABILITY or FITNESS FOR A
     PARTICULAR PURPOSE.
-		
+
 	For updates, please visit:
 	http://www.html-form-guide.com/php-form/php-form-validation.html
-	
+
 	Questions & comments please send to info@html-form-guide.com
-  -------------------------------------------------------------------------  
+  -------------------------------------------------------------------------
 */
 
 /**
@@ -31,7 +31,7 @@ class ValidatorObj
 /**
 * Base class for custom validation objects
 **/
-class CustomValidator 
+class CustomValidator
 {
 	function DoValidate(&$formars,&$error_hash)
 	{
@@ -63,19 +63,19 @@ define("E_VAL_NEELMNT_CHECK_FAILED","Value of %s should not be same as that of %
 /**
 * FormValidator: The main class that does all the form validations
 **/
-class FormValidator 
+class FormValidator
 {
 	var $validator_array;
     var $error_hash;
 	var $custom_validators;
-	
+
 	function FormValidator()
 	{
 		$this->validator_array = array();
         $this->error_hash = array();
 		$this->custom_validators=array();
 	}
-	
+
 	function AddCustomValidator(&$customv)
 	{
 		array_push($this->custom_validators,$customv);
@@ -101,7 +101,7 @@ class FormValidator
 		$error_string="";
 		$error_to_display = "";
 
-        
+
 		if(strcmp($_SERVER['REQUEST_METHOD'],'POST')==0)
 		{
 			$form_variables = $_POST;
@@ -112,7 +112,7 @@ class FormValidator
 		}
 
         $vcount = count($this->validator_array);
-        
+
 
 		foreach($this->validator_array as $val_obj)
 		{
@@ -151,7 +151,7 @@ class FormValidator
 		}
 
 		$default_error_message="";
-		
+
 		$input_value ="";
 
 		if(isset($formvariables[$validatorobj->variable_name]))
@@ -164,7 +164,7 @@ class FormValidator
 									$validatorobj->variable_name,
 									$formvariables);
 
-		
+
 		if(false == $bret)
 		{
 			if(isset($validatorobj->error_string) &&
@@ -180,7 +180,7 @@ class FormValidator
 		}//if
 		return $bret;
 	}
-    	
+
 	function validate_req($input_value, &$default_error_message,$variable_name)
 	{
 	  $bret = true;
@@ -189,8 +189,8 @@ class FormValidator
 		{
 			$bret=false;
 			$default_error_message = sprintf(E_VAL_REQUIRED_VALUE,$variable_name);
-		}	
-	  return $bret;	
+		}
+	  return $bret;
 	}
 
 	function validate_maxlen($input_value,$max_len,$variable_name,&$default_error_message)
@@ -232,19 +232,19 @@ class FormValidator
 		return true;
 	}
 
-	function validate_email($email) 
+	function validate_email($email)
 	{
 		return preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $email);
 	}
 
 	function validate_for_numeric_input($input_value,&$validation_success)
 	{
-		
+
 		$more_validations=true;
 		$validation_success = true;
 		if(strlen($input_value)>0)
 		{
-			
+
 			if(false == is_numeric($input_value))
 			{
 				$validation_success = false;
@@ -416,7 +416,7 @@ class FormValidator
 							{
 								$default_error_message = sprintf(E_VAL_NUM_CHECK_FAILED,$variable_name);
 							}
-							break;							
+							break;
 						}
 
 			case 'alpha':
@@ -449,8 +449,8 @@ class FormValidator
 							}
 							break;
 						}
-			case "lt": 
-			case "lessthan": 
+			case "lt":
+			case "lessthan":
 						{
 							$bret = $this->validate_lessthan($command_value,
 													$input_value,
@@ -458,8 +458,8 @@ class FormValidator
 													$default_error_message);
 							break;
 						}
-			case "gt": 
-			case "greaterthan": 
+			case "gt":
+			case "greaterthan":
 						{
 							$bret = $this->validate_greaterthan($command_value,
 													$input_value,
@@ -480,7 +480,7 @@ class FormValidator
 							}
 							break;
 						}
-		  case "dontselect": 
+		  case "dontselect":
 		  case "dontselectchk":
           case "dontselectradio":
 						{
@@ -562,7 +562,7 @@ class FormValidator
 							}
 							break;
 						}
-		 
+
 		}//switch
 		return $bret;
 	}//validdate command
