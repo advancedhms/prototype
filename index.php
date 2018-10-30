@@ -1,13 +1,13 @@
 <?php
-<<<<<<< HEAD
+
 function __autoload($class_name) {
 include 'class.' . $class_name . '.inc';
 }
 
-=======
+
   include 'includes/class.user.inc';
   include 'includes/register.php';
->>>>>>> 16964e0402734c760b9d48ea4b1d69952b42b38c
+
   $user = new User();
   if(isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
