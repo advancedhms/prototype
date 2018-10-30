@@ -70,10 +70,19 @@
         return $this->_user;
     }
 
-  /*  public function register($data = array()) {
-      $sql = "Insert into tablename values ('$data['email']','$data['password']')";
-      $mysqli->query($sql);
-    }*/
+    public function register($data = array()) {
+      $db = $this->_db;
+      $mysqli->$db->getConnection();
+      $sql = "Insert into admin values ('$data['user_id']','$data['name']','$data['hospital_id']','$data['email']')";
+      $result = $mysqli->query($sql);
+      if($row = $result->fetch_assoc()) {
+        $sql = "Insert into users values('$data['user_id']','$data['password']')";
+        $result = $mysqli->query($sql) ;
+        if($row1 = $result->fetch_assoc()) {
+          
+        }
+      }
+    }
   }
 
  ?>
