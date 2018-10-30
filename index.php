@@ -1,7 +1,7 @@
 <?php
 
 function __autoload($class_name) {
-include 'class.' . $class_name . '.inc';
+include 'includes/class.' . $class_name . '.inc';
 }
 
 
@@ -50,21 +50,7 @@ include 'class.' . $class_name . '.inc';
       );
       $new_user = $user->register($data);
 
-
-    if(isset($_POST['register'])) {
-      if(!$_POST['password'] === $_POST['confirmpassword']) {
-        return false;
-      }
-      $data = array
-      ('name' =>$_POST['name'] ,
-      'user_id'=> $_POST['user_id'],
-      'hospital_id'=> $_POST['hospitalid'],
-      'email'=>$_POST['email'],
-      'password'=>$_POST['regpassword'],
-     );
-     $user->register($data);
-
-    }
+  }
     ?>
 <!doctype html>
 <html>
@@ -96,8 +82,6 @@ include 'class.' . $class_name . '.inc';
 
 
                   <!-- Login Form -->
-
-                  <!-- Login form -->
 
                   <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
                     <span><?php echo $error; ?></span>
@@ -139,16 +123,13 @@ include 'class.' . $class_name . '.inc';
                     <span><?php echo $error; ?></span>
                     <h5 class="card-title text-center">Register</h5>
                   <form class="form-signin" method="post" action="index.php">
-                    <div class="form-label-group">
+                    
+                      <div class="form-label-group">
+                        <input type="text" name="name" id="userid" class="form-control" placeholder="name" required autofocus>
+                        <label for="inputname">Fullname</label>
+                      </div>
 
-                      <input type="text" name="name" id="name" class="form-control" placeholder="Fullname" required autofocus>
-                      <label for="inputname">Fullname</label>
-                    </div>
-                  <hr>
 
-                      <input type="text" name="name" id="userid" class="form-control" placeholder="name" required autofocus>
-                      <label for="inputname">Fullname</label>
-                    </div>
                     <hr>
 
                       <div class="form-label-group">
@@ -165,15 +146,9 @@ include 'class.' . $class_name . '.inc';
 
                   <hr>
 
-                  <div class="form-label-group">
-                    <input type="ID" name="id" id="id" class="form-control" placeholder="Id" required>
-                    <label for="inputPassword">Hospital ID</label>
-                  </div>
-                  <hr>
-
                       <div class="form-label-group">
                         <input type="ID" name="hospitalid" id="id" class="form-control" placeholder="HospitalID" required>
-                        <label for="inputPassword">Hospital ID</label>
+                        <label for="id">Hospital ID</label>
                       </div>
                       <hr>
 
@@ -186,15 +161,7 @@ include 'class.' . $class_name . '.inc';
 
 
                       <hr>
-                      <div class="form-label-group">
-                        <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Password" required>
-                        <label for="confirmPassword">Confirm Password</label>
 
-                      <!--<div class="form-label-group">
-                        <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
-                        <label for="inputConfirmPassword">Confirm password</label>
-                      </div>-->
-                      <hr>
                       <div class="form-label-group">
                         <input type="password" name="confirmpassword" id="password" class="form-control" placeholder="Confirm Password" required>
                         <label for="inputPassword">Confirm Password</label>

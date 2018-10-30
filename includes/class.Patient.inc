@@ -118,7 +118,7 @@
 			public static ValidateID($patient_id) {
 				$db = Database::getInstance();
 				$mysqli = $db->getConnection();
-				$sql = 'SELECT * from patient where patient_id = "'.$patient_id.'" ';
+				$sql = 'SELECT * from patient where patientID = "'.$patient_id.'" ';
 				$result = $mysqli->query($sql);
 
 				if($result->num_rows == 0) {

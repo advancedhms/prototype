@@ -91,10 +91,10 @@
 
       if(Hospital::ValidateID($this->$_hospitalid)) {
         $regdata = array(
-          'admin_id'=>$this->_id,
-          'username'=$this->_name,
-          'email'=$this->_email,
-          'hospitalid'=$this->_hospitalid,
+          'admin_id' => $this->_id,
+          'username' => $this->_name,
+          'email' => $this->_email,
+          'hospitalid' => $this->_hospitalid,
       );
         $this->_user = new Admin($regdata);
         if($this->_user) {
@@ -117,13 +117,17 @@
         return $this->_user;
     }
 
-    public function register($data = array()) {
+    /*public function register($data = array()) {
       $db = $this->_db;
       $mysqli->$db->getConnection();
-      $sql = "Insert into admin values ('$data['user_id']','$data['name']','$data['hospital_id']','$data['email']')";
+      $this->_id = $data['user_id'];
+      $this->_name = $data['name'];
+      $this->_hospitalid = $data['hospitalid'];
+      $this->_email = $data['email'];
+      $sql = "Insert into admin values ('$this->_id','$this->_name','$this->_email','$this->_hospitalid')";
       $result = $mysqli->query($sql);
       if($row = $result->fetch_assoc()) {
-        $sql = "Insert into users values('$data['user_id']','$data['password']')";
+        $sql = "Insert into users values('$this->_id','$this->_password')";
         $result = $mysqli->query($sql) ;
         if($row1 = $result->fetch_assoc()) {
           return $row['userid'];
@@ -131,7 +135,7 @@
         return false;
       }
       return false;
-    }
+    }*/
   }
 
  ?>
