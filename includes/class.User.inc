@@ -126,9 +126,11 @@
         $sql = "Insert into users values('$data['user_id']','$data['password']')";
         $result = $mysqli->query($sql) ;
         if($row1 = $result->fetch_assoc()) {
-          
+          return $row['userid'];
         }
+        return false;
       }
+      return false;
     }
   }
 

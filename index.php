@@ -5,7 +5,7 @@ include 'class.' . $class_name . '.inc';
 }
 
 
-  include 'includes/class.user.inc';
+  //include 'includes/class.user.inc';
   include 'includes/register.php';
 
 
