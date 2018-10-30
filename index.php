@@ -8,10 +8,7 @@ include 'class.' . $class_name . '.inc';
   include 'includes/class.user.inc';
   include 'includes/register.php';
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 8c6633a61ea4e0952ca8ab08b17ec9114f66ba4c
   $user = new User();
   if(isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
@@ -39,7 +36,7 @@ include 'class.' . $class_name . '.inc';
     }
 
     }
-<<<<<<< HEAD
+
     if(isset($_POST['register'])) {
       if(!$_POST['regpassword'] === $_POST['confirmPassword']) {
         return false;
@@ -52,7 +49,7 @@ include 'class.' . $class_name . '.inc';
         'password' => $_POST['regpassword'],
       );
       $new_user = $user->register($data);
-=======
+
 
     if(isset($_POST['register'])) {
       if(!$_POST['password'] === $_POST['confirmpassword']) {
@@ -66,7 +63,7 @@ include 'class.' . $class_name . '.inc';
       'password'=>$_POST['regpassword'],
      );
      $user->register($data);
->>>>>>> 8c6633a61ea4e0952ca8ab08b17ec9114f66ba4c
+
     }
     ?>
 <!doctype html>
@@ -96,12 +93,12 @@ include 'class.' . $class_name . '.inc';
                   </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
-<<<<<<< HEAD
+
 
                   <!-- Login Form -->
-=======
+
                   <!-- Login form -->
->>>>>>> 8c6633a61ea4e0952ca8ab08b17ec9114f66ba4c
+
                   <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
                     <span><?php echo $error; ?></span>
                     <h5 class="card-title text-center">Login</h5>
@@ -136,27 +133,24 @@ include 'class.' . $class_name . '.inc';
                     </form>
                   </div>
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 8c6633a61ea4e0952ca8ab08b17ec9114f66ba4c
                   <!-- Register form -->
                   <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
                     <span><?php echo $error; ?></span>
                     <h5 class="card-title text-center">Register</h5>
                   <form class="form-signin" method="post" action="index.php">
                     <div class="form-label-group">
-<<<<<<< HEAD
+
                       <input type="text" name="name" id="name" class="form-control" placeholder="Fullname" required autofocus>
                       <label for="inputname">Fullname</label>
                     </div>
                   <hr>
-=======
+
                       <input type="text" name="name" id="userid" class="form-control" placeholder="name" required autofocus>
                       <label for="inputname">Fullname</label>
                     </div>
                     <hr>
->>>>>>> 8c6633a61ea4e0952ca8ab08b17ec9114f66ba4c
+
                       <div class="form-label-group">
                         <input type="text" name="user_id" id="userid" class="form-control" placeholder="Username" required autofocus>
                         <label for="inputUserame">Username</label>
@@ -170,32 +164,32 @@ include 'class.' . $class_name . '.inc';
                   </div>
 
                   <hr>
-<<<<<<< HEAD
+
                   <div class="form-label-group">
                     <input type="ID" name="id" id="id" class="form-control" placeholder="Id" required>
                     <label for="inputPassword">Hospital ID</label>
                   </div>
                   <hr>
-=======
+
                       <div class="form-label-group">
                         <input type="ID" name="hospitalid" id="id" class="form-control" placeholder="HospitalID" required>
                         <label for="inputPassword">Hospital ID</label>
                       </div>
                       <hr>
->>>>>>> 8c6633a61ea4e0952ca8ab08b17ec9114f66ba4c
+
 
                       <div class="form-label-group">
                         <input type="password" name="regpassword" id="password" class="form-control" placeholder="Password" required>
                         <label for="inputPassword">Password</label>
                       </div>
 
-<<<<<<< HEAD
+
 
                       <hr>
                       <div class="form-label-group">
                         <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Password" required>
                         <label for="confirmPassword">Confirm Password</label>
-=======
+
                       <!--<div class="form-label-group">
                         <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
                         <label for="inputConfirmPassword">Confirm password</label>
@@ -204,7 +198,7 @@ include 'class.' . $class_name . '.inc';
                       <div class="form-label-group">
                         <input type="password" name="confirmpassword" id="password" class="form-control" placeholder="Confirm Password" required>
                         <label for="inputPassword">Confirm Password</label>
->>>>>>> 8c6633a61ea4e0952ca8ab08b17ec9114f66ba4c
+
                       </div>
 
                       <button class="btn btn-lg btn-primary btn-block text-uppercase" name="register" type="submit">Submit</button>
