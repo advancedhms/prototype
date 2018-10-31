@@ -76,7 +76,6 @@
       if(count($data) > 0) {
 				foreach($data as $name => $value) {
 					if(in_array($name,array(
-						'id',
 						'name',
             'email',
 						'hospitalid',
@@ -85,21 +84,22 @@
 					))) {
 						$name = '_'.$name;
 					}
-					$this->$name = $value;
+          $this->$name = $value;
+          
 				}
 			}
 
       if(Hospital::ValidateID($this->$_hospitalid)) {
         $regdata = array(
-          'admin_id' => $this->_id,
-          'username' => $this->_name,
+          'username' => $this->_id,
+          'name' => $this->_name,
           'email' => $this->_email,
           'hospitalid' => $this->_hospitalid,
       );
         $this->_user = new Admin($regdata);
         if($this->_user) {
           $mysqli = $this->_db->getConnection();
-          $sql = "Insert into users values ('$this->_id','$this->_password')";
+          $sql = "Insert into users(user_id, name, email, password, created_at) values ('$this->_id','$this->_name','$this->_email','$this->_password',time())";
           $result = $mysqli->query($sql);
           if($row = $result->fetch_assoc()) {
             $flag = "Account has been created";

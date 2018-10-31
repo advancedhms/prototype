@@ -115,7 +115,7 @@
 				}
 			}
 
-			public static ValidateID($patient_id) {
+			public static function ValidateID($patient_id) {
 				$db = Database::getInstance();
 				$mysqli = $db->getConnection();
 				$sql = 'SELECT * from patient where patientID = "'.$patient_id.'" ';

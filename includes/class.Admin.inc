@@ -5,35 +5,28 @@ include 'class.Patient.inc';
 
 class Admin extends User {
   protected $username;
-  protected $admin_id;
+  protected $name;
   protected $email;
   protected $hospitalid;
-
+  protected $_db;
+  protected $_time_created;
   public $error_msg = '';
 
-  public function __construct($id) {
-
-    $db = Database::getInstance();
-    $mysqli = $db->getConnection();
-
-    $sql = "SELECT * from Admin where adminid = '".$id."' ";
-    $result = $mysqli->query($sql);
-    if ($row = $result->fetch_assoc()){
-        $this->admin_id = $id;
-        return self::getInstance($row);
-    }
-  }
-
   public function __construct($data = array()) {
+    $this->_db = Database::getInstance();
     if(!is_array($data)) {
       trigger_error('unable to construct class with: '.get_class($data));
     }
+    $this->_time_created = time();
     if(count($data) > 0) {
       foreach ($data as $name => $value) {
         $this->name = $value;
       }
     }
-    $this->save();
+    if($this->checkUser($data['username'])) {
+      $this->save();
+    }
+    
   }
 
   /**
@@ -41,7 +34,7 @@ class Admin extends User {
   *takes a property value and sets the value
   **/
   function __set($name, $value) {
-    if($name == 'admin_id') {
+    if($name == 'username') {
       $this->$name = $value;
       return;
     }
@@ -96,7 +89,7 @@ class Admin extends User {
     if(!$user) {
       $flag = Patient::ValidateID($patient_id);
       if($flag) {
-        return User->Register($user);
+        return $user->Register($user);
       }
       else {
         $error_msg = "PatientID does not exist in the system";
@@ -112,7 +105,7 @@ class Admin extends User {
     if(!$user) {
       $flag = Doctor::ValidateID($doctor_id);
       if($flag) {
-        return User->Register($user);
+        return $user->Register($user);
 
       }
       else {
@@ -132,8 +125,26 @@ class Admin extends User {
    return new Admin($data);
  }
 
+ public final function checkUser($id) {
+    $db = $this->_db;
+    $mysqli = $db->getConnection();
+    $sql = "Select * from admin where username = '".$id."' ";
+    $result = $mysqli->query($sql);
+    if(!$result->num_rows == 0) {
+      trigger_error('User already exists');
+      return false;
+    }
+    return true;
+ }
+
  public function save() {
-   
+   $db = $this->_db;
+   $mysqli = $db->getConncetion();
+   $sql = "Insert into admin values ('$this->username','$this->name','$this->email','$this->hospitalid',$this->_time_created)";
+   $result = $mysqli->query($sql);
+   if(!$result) {
+      trigger_error('unable to create user.');
+   }
  }
 
 

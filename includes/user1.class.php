@@ -116,7 +116,7 @@ class UserLogin
           $result = $mysqli->query($sql);
           $userinfo = $result->fetch_assoc();
         }
-        elseif ($row['userid'] == %doc) {
+        elseif (preg_match('/doc$/',$row['userid'])) {
           # code...
           $sql = 'SELECT * from doctor where doctorid = "'.$_SESSION['userid'].'" ';
           $result = $mysqli->query($sql);
@@ -199,7 +199,7 @@ class UserLogin
 
 		//if remember me was set, but no cookies exist, create the cookies now
 		if( $remember_me && !isset( $_COOKIE[ $this->cookie_prefix.'ID'] ) )
-		{$username
+		{$username = 
 			setcookie( $this->cookie_prefix.'ID', 			$userinfo->id, 				TIME_NOW + COOKIE_TIMEOUT, '' ); //User ID
 			setcookie( $this->cookie_prefix.'UserName', 	$userinfo->username, 		TIME_NOW + COOKIE_TIMEOUT, '' ); //User Name
 			setcookie( $this->cookie_prefix.'Password', 	$userinfo->password, 		TIME_NOW + COOKIE_TIMEOUT, '' ); //User Password
