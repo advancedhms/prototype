@@ -1,11 +1,11 @@
 <?php
 
-function __autoload($class_name) {
+/*function __autoload($class_name) {
 include 'includes/class.' . $class_name . '.inc';
 }
+*/
 
-
-  //include 'includes/class.user.inc';
+  include 'includes/class.User.inc';
   include 'includes/register.php';
 
 
@@ -38,7 +38,7 @@ include 'includes/class.' . $class_name . '.inc';
     }
 
     if(isset($_POST['register'])) {
-      if(!$_POST['regpassword'] === $_POST['confirmPassword']) {
+      if(!$_POST['regpassword'] === $_POST['confirmpassword']) {
         return false;
       }
       $data = array(
@@ -49,6 +49,9 @@ include 'includes/class.' . $class_name . '.inc';
         'password' => $_POST['regpassword'],
       );
       $new_user = $user->register($data);
+      if($new_user) {
+        header('Location: admin.php');
+      }
 
   }
     ?>
@@ -140,7 +143,7 @@ include 'includes/class.' . $class_name . '.inc';
                       <hr>
 
                       <div class="form-label-group">
-										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address"  required value="">
+										<input type="email" name="email" id="email" class="form-control" placeholder="Email Address"  required>
                     <label for="inputEmail">Email address</label>
                   </div>
 

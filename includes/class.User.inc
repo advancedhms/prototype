@@ -3,6 +3,8 @@
    *
    */
    include 'class.Database.inc';
+   include 'class.Admin.inc';
+   include 'class.Hospital.inc';
   class User
   {
 
@@ -86,7 +88,8 @@
 					}
           $this->$name = $value;
           
-				}
+        }
+        
 			}
 
       if(Hospital::ValidateID($this->$_hospitalid)) {

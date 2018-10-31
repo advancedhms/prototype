@@ -15,8 +15,9 @@ class Hospital
   }
 
   public static function ValidateID($id) {
-    $mysqli = $this->_db->getConnection();
-    $sql = "SELECT * from hospital where id = '".$id."' '";
+    $db = Database::getInstance();
+    $mysqli = $db->getConnection();
+    $sql = "SELECT * from hospital where hospital_id = '".$id."' '";
     $result = $mysqli->query($sql);
     if(!$result->num_rows() == 0) {
       return TRUE;
