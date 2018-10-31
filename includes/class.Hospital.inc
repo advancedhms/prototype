@@ -1,6 +1,6 @@
 
 <?php
-include 'class.Database.inc';
+//include 'class.Database.inc';
 /**
  *
  */
@@ -11,19 +11,26 @@ class Hospital
 
   function __construct()
   {
-    $this->_db = Database::getInstance();
+
   }
 
   public static function ValidateID($id) {
     $db = Database::getInstance();
     $mysqli = $db->getConnection();
-    $sql = "SELECT * from hospital where hospital_id = '".$id."' '";
+    $sql = 'Select * from hospital where hospital_id = "'.$id.'" ';
     $result = $mysqli->query($sql);
-    if(!$result->num_rows() == 0) {
+    if(!$result->num_rows == 0) {
       return TRUE;
     }
     return false;
   }
+
+  public static function getInstance() {
+		if(!self::$_instance) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+	}
 }
 
 

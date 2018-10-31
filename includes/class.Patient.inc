@@ -90,7 +90,7 @@
 			return $output;
 		}
 
-		 public static function login($patient_id,$password) {
+		/* public static function login($patient_id,$password) {
 			$db = Database::getInstance();
 			$mysqli = $db->getConnection();
 			$sql = 'SELECT * from patient where patient_id = "'.$patient_id.'" ';
@@ -103,17 +103,17 @@
 				if($row = $result->fetch_assoc()) {
 					{
 						if($password == $row['password']) {
-							/*$sql1 = 'UPDATE patient_info SET time_logged_in = "'.(int) time().'"';
+							$sql1 = 'UPDATE patient_info SET time_logged_in = "'.(int) time().'"';
 							$result1 = $mysqli->query($sql1);
 							if($row1 = $result1->fetch_assoc()){
-							*/
+							
 							return self::getInstance($row);
 							}
 						}
 					}
 
 				}
-			}
+		 }*/
 
 			public static function ValidateID($patient_id) {
 				$db = Database::getInstance();

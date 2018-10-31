@@ -1,9 +1,9 @@
 <?php
-include 'class.Database.inc';
+/*require_once 'class.Database.inc';
 include 'class.User.inc';
 include 'class.Patient.inc';
-
-class Admin extends User {
+*/
+class Admin {
   protected $username;
   protected $name;
   protected $email;
@@ -121,16 +121,19 @@ class Admin extends User {
 
   }
 
-  public static function getInstance($data = array()) {
-   return new Admin($data);
- }
+  public static function getInstance() {
+		if(!self::$_instance) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+	}
 
  public final function checkUser($id) {
     $db = $this->_db;
     $mysqli = $db->getConnection();
     $sql = "Select * from admin where username = '".$id."' ";
     $result = $mysqli->query($sql);
-    if(!$result->num_rows == 0) {
+    if($result->num_rows == 0) {
       trigger_error('User already exists');
       return false;
     }
@@ -139,11 +142,17 @@ class Admin extends User {
 
  public function save() {
    $db = $this->_db;
-   $mysqli = $db->getConncetion();
-   $sql = "Insert into admin values ('$this->username','$this->name','$this->email','$this->hospitalid',$this->_time_created)";
-   $result = $mysqli->query($sql);
-   if(!$result) {
-      trigger_error('unable to create user.');
+   $mysqli = $db->getConnection();
+   $sql = 'Insert into admin values( ';
+   $sql .= "$this->username, ";
+   $sql .= "$this->name,  ";
+   $sql .= "$this->email, ";
+   $sql .= "$this->hospitalid, ";
+   $sql .= $this->_time_created;
+   $sql .= " )";
+   
+   if($mysqli->query($sql)) {
+      $session['admin_id'] = $this->username;
    }
  }
 

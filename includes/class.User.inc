@@ -2,9 +2,9 @@
   /**
    *
    */
-   include 'class.Database.inc';
+   /*include 'class.Database.inc';
    include 'class.Admin.inc';
-   include 'class.Hospital.inc';
+   include 'class.Hospital.inc';*/
   class User
   {
 
@@ -31,6 +31,30 @@
        $this->_db = Database::getInstance();
        session_start();
     }
+
+    function __set($name, $value) {
+			if($name == 'id') {
+				$this->$name = $value;
+				return;
+			}
+			trigger_error('Unable to access property via __set:'.$name);
+				return NULL;
+		}
+
+		/**
+		*magic get method
+		*returns property
+		**/
+		function __get($name) {
+			$property = '_'.$name;
+			if(property_exists($this, $property)) {
+				return $property;
+
+				trigger_error('Unable to access property via __get:'.$name);
+				return NULL;
+		}
+
+	}
 
     public function login($user_id, $password)
     {
@@ -92,7 +116,7 @@
         
 			}
 
-      if(Hospital::ValidateID($this->$_hospitalid)) {
+      if(Hospital::ValidateID($this->_hospitalid)) {
         $regdata = array(
           'username' => $this->_id,
           'name' => $this->_name,
@@ -104,7 +128,7 @@
           $mysqli = $this->_db->getConnection();
           $sql = "Insert into users(user_id, name, email, password, created_at) values ('$this->_id','$this->_name','$this->_email','$this->_password',time())";
           $result = $mysqli->query($sql);
-          if($row = $result->fetch_assoc()) {
+          if($result) {
             $flag = "Account has been created";
             return $flag;
           }
@@ -118,6 +142,12 @@
     public function getUser()
     {
         return $this->_user;
+    }
+    public static function getInstance() {
+      if(!self::$_instance) {
+        self::$_instance = new self();
+      }
+      return self::$_instance;
     }
 
     /*public function register($data = array()) {

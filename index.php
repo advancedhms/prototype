@@ -2,11 +2,11 @@
 
 /*function __autoload($class_name) {
 include 'includes/class.' . $class_name . '.inc';
-}
-*/
+}*/
 
-  include 'includes/class.User.inc';
-  include 'includes/register.php';
+
+  include_once 'includes/classes.php';
+  //include 'includes/register.php';
 
 
   $user = new User();
