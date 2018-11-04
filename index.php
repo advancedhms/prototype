@@ -10,13 +10,18 @@ include 'includes/class.' . $class_name . '.inc';
   //include 'includes/register.php';
 
 
-  $user = new User();
+  
 
   if(isset($_POST['submit'])) {
+
     $user_id = $_POST['user_id'];
     $password = $_POST['password'];
     $error = " ";
-    $userinfo = $user->login($user_id, $password);
+    $user = new User(array(
+      'id' => $user_id,
+      'password' => $password,
+    ));
+    $userinfo = $user->login();
 
     if($userinfo) {
       if(preg_match('/pat$/', $userinfo)) {
@@ -41,17 +46,25 @@ include 'includes/class.' . $class_name . '.inc';
 
     if(isset($_POST['register'])) {
       if(!$_POST['regpassword'] === $_POST['confirmpassword']) {
+        $error = "Passwords do no match";
         return false;
       }
+      $id = $_POST['user_id'];
+      $name =  $_POST['name'];
+      $email = $_POST['email'];
+      $hospitalid = $_POST['hospitalid'];
+      $password = $_POST['regpassword'];
       $data = array(
-        'id' => $_POST['user_id'],
-        'name' => $_POST['name'],
-        'email' => $_POST['email'],
-        'hospitalid' => $_POST['hospitalid'],
-        'password' => $_POST['regpassword'],
+        'id' => $id,
+        'name' => $name,
+        'email' => $email,
+        'hospitalid' => $hospitalid,
+        'password' => $password,
       );
+      $user = new User($data);
       $new_user = $user->register($data);
-      if($new_user) {
+      
+      if($new_user && $data['id'] == $_SESSION['user_id']) {
         header('Location: admin.php');
       }
 

@@ -14,9 +14,9 @@
     public $name;
     protected $_hospitalid;
     protected $_db;       // stores the database handler
-    public $user;     // stores the user data
+    protected $_user;     // stores the user data
     protected $_time_created; // Stores the time the user was created
-
+    private static $_instance;
   	protected $errors = NULL; //array to hold all of the errors
     //Defining the various errors
     const ERROR1 = "User not found";
@@ -67,7 +67,7 @@
   *takes a property value and sets the value
   **/
   function __set($name, $value) {
-    if('id' == $name) {
+    if('id' == $name || 'password' == $name) {
       $this->$name = $value;
       return;
     }
@@ -75,7 +75,7 @@
       return NULL;
   }
 
-    public function login()
+    function login()
     {
         $user_id = $this->_id;
         $password = $this->_password;
@@ -89,11 +89,11 @@
         return false;
     }
 
-    protected function _checkCredentials($user_id, $password)
+    function _checkCredentials($user_id, $password)
     {
       $db = Database::getInstance();
       $mysqli = $db->getConnection();
-      $sql = 'SELECT * from users where user_id = "'.$user_id.'" ';
+      $sql = "SELECT * FROM users where user_id = '$user_id'";
       $result = $mysqli->query($sql);
 
         if ($row = $result->fetch_assoc()) {

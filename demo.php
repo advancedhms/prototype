@@ -5,11 +5,8 @@
 	//echo "<tt><pre>".var_export($user, true)."</pre></tt>";
 
 	    $data = array(
-	    'id' => 'ikeadmin',
-        'name' => 'Kwame Owusu',
-        'email' => 'nanayawasuako@gmail.com',
-        'hospitalid' => 'hosp1214',
-        'password' => '2bhjsodir',        
+	    'id' => 'markadmin',
+        'password' => 'kuiler',        
       );
 
      /* $new_user = $user->register($data);
@@ -27,7 +24,7 @@
         'hospitalid' => 'hosp1234',
         
       ));*/
-      $new_user = new Admin;
+      $user = new User($data);
     
      /*$new_user->username = $data['username'];
      $new_user->name = $data['name'];
@@ -46,7 +43,7 @@
         echo "Registeration Unsuccessful";
       }
       echo "<br/>";*/
-      $new_admin_user = new User($data);
+    /*  $new_admin_user = new User($data);
 
       echo "<tt><pre>". var_export($new_admin_user, true)   ."</pre></tt>";
       $user = $new_admin_user->register();
@@ -55,5 +52,15 @@
       }
       else {
         echo "Registeration unsuccesfull";
+      }*/
+
+      echo "<tt><pre>". var_export($user, true)   ."</pre></tt>";
+      $new_user = $user->login();
+      if($new_user) {
+        header('Location: admin.php');
       }
+      else {
+        echo "Login unsuccessfull";
+      }
+
 ?>
