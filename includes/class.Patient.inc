@@ -1,5 +1,5 @@
 <?php
-	class Patient extends User {
+	class Patient {
 		protected $_patient_id;
 		public $patient_name;
 		public $patient_age;
@@ -130,9 +130,11 @@
 
 
 
+		 
 		 public static function getInstance($data = array()) {
 			return new Patient($data);
 		}
 
 	}
+	
 ?>

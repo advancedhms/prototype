@@ -30,7 +30,7 @@ class Database {
 	public function getConnection() {
 		return $this->_connection;
 	}
-
+	private function __clone() {}
 
 }
 

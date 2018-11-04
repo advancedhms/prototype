@@ -3,43 +3,36 @@
 include 'class.User.inc';
 include 'class.Patient.inc';
 */
-class Admin {
-  protected $username;
-  protected $name;
-  protected $email;
-  protected $hospitalid;
+class Admin{
+  protected $_username;
+  public $name;
+  public $email;
+  public $hospitalid;
   protected $_db;
   protected $_time_created;
   public $error_msg = '';
 
   public function __construct($data = array()) {
-    $this->_db = Database::getInstance();
+    $this->_time_created = time();
     if(!is_array($data)) {
       trigger_error('unable to construct class with: '.get_class($data));
     }
-    $this->_time_created = time();
-    if(count($data) > 0) {
-      foreach ($data as $name => $value) {
-        $this->name = $value;
-      }
-    }
-    if($this->checkUser($data['username'])) {
+      if(count($data) > 0)   {
+        foreach ($data as $name => $value) {
+          if(in_array($name, array(
+            'username',
+            'db',
+            'time_created',
+          ))) {
+            $name = '_' . $name;
+          }
+          $this->$name = $value;
+        }
+      }   
+      
+    /*if($this->checkUser($this->username)) {
       $this->save();
-    }
-    
-  }
-
-  /**
-  *magic set method
-  *takes a property value and sets the value
-  **/
-  function __set($name, $value) {
-    if($name == 'username') {
-      $this->$name = $value;
-      return;
-    }
-    trigger_error('Unable to access property via __set:'.$name);
-      return NULL;
+    }*/
   }
 
   /**
@@ -48,21 +41,41 @@ class Admin {
   **/
   function __get($name) {
 
-    if(property_exists($this, $name)) {
-      return $property;
+    // Attempt to return a protected property by name
+    $protected_property_name = '_'. $name;
+    if(property_exists($this, $protected_property_name)) {
+      return $this->$protected_property_name;
+    }
 
       trigger_error('Unable to access property via __get:'.$name);
       return NULL;
   }
 
   /**
+  *magic set method
+  *takes a property value and sets the value
+  **/
+  function __set($name, $value) {
+    if('username' == $name) {
+      $this->$name = $value;
+      return;
+    }
+    trigger_error('Unable to access property via __set:'.$name);
+      return NULL;
+  }
+  /*function __clone() {
+    $this->_time_created = time();
+  }
+  
+
+  /**
   * Magic toSring
   * returns a display of patient data
   **/
 
-  function __toString() {
+  /*function __toString() {
     return $this->display();
-  }
+  }*/
 
   /**
   *Display method
@@ -72,17 +85,17 @@ class Admin {
   function display() {
     $output = '';
     $output .= 'Admin ID = ';
-    $output .= $this->admin_id;
+    $output .= $this->username;
 
     $output .= '</br>';
     $output .= 'Name = ';
-    $output .= $this->user_name;
+    $output .= $this->name;
 
     # remaining goes here
     return $output;
   }
 
-  }
+  
 
   public function register_Patient($patient_id, $password) {
     $user = User::_checkCredentials($patient_id, $password);
@@ -128,34 +141,49 @@ class Admin {
 		return self::$_instance;
 	}
 
- public final function checkUser($id) {
-    $db = $this->_db;
+ function checkUser($id) {
+    $db = Database::getInstance();
     $mysqli = $db->getConnection();
-    $sql = "Select * from admin where username = '".$id."' ";
+    $sql = "SELECT * FROM admin where username = '$id' ";
     $result = $mysqli->query($sql);
     if($result->num_rows == 0) {
-      trigger_error('User already exists');
-      return false;
+      return true;
     }
-    return true;
+   $this->error_msg = "User already Exists";
+    return false;
  }
 
- public function save() {
-   $db = $this->_db;
+ function saveDetails() {
+
+   $db = Database::getInstance();
    $mysqli = $db->getConnection();
-   $sql = 'Insert into admin values( ';
-   $sql .= "$this->username, ";
-   $sql .= "$this->name,  ";
-   $sql .= "$this->email, ";
-   $sql .= "$this->hospitalid, ";
-   $sql .= $this->_time_created;
-   $sql .= " )";
-   
-   if($mysqli->query($sql)) {
-      $session['admin_id'] = $this->username;
-   }
- }
+   $username = $this->_username;
+   $name = $this->name;
+   $email = $this->email;
+   $hospitalid = $this->hospitalid;
 
+   if($this->checkUser($username)) {
+
+    if(Hospital::ValidateID($hospitalid)){
+      $sql = "INSERT INTO admin "
+         ." VALUES('$username', '$name' ,'$email' , '$hospitalid')";
+                
+         if($mysqli->query($sql)) {
+            $session['admin_id'] = $username;
+            return true;
+         }
+         else {
+          $this->error_msg = 'Unable to register Admin';
+          return false;
+         }
+    }
+   }
+
+   return false;
+
+
+} 
+  //final public function save() {}
 
 }
 

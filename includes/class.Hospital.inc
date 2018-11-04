@@ -17,10 +17,10 @@ class Hospital
   public static function ValidateID($id) {
     $db = Database::getInstance();
     $mysqli = $db->getConnection();
-    $sql = 'Select * from hospital where hospital_id = "'.$id.'" ';
+    $sql = "Select * from hospital where hospital_id = '$id' ";
     $result = $mysqli->query($sql);
-    if(!$result->num_rows == 0) {
-      return TRUE;
+    if($row = $result->fetch_assoc()) {
+      return true;
     }
     return false;
   }

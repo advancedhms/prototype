@@ -11,10 +11,10 @@
     protected $_email;    // using protected so they can be accessed
     protected $_password; // and overidden if necessary
     protected $_id;
-    protected $_name;
+    public $name;
     protected $_hospitalid;
     protected $_db;       // stores the database handler
-    protected $_user;     // stores the user data
+    public $user;     // stores the user data
     protected $_time_created; // Stores the time the user was created
 
   	protected $errors = NULL; //array to hold all of the errors
@@ -26,39 +26,59 @@
     public $error_message = '';
 
 
-    public function __construct()
-    {
-       $this->_db = Database::getInstance();
-       session_start();
+    public function __construct($data = array()) {
+    $this->_time_created = time();
+    if(!is_array($data)) {
+      trigger_error('unable to construct class with: '.get_class($data));
+    }
+      if(count($data) > 0)   {
+        foreach ($data as $name => $value) {
+          if(in_array($name, array(
+            'email',
+            'password',
+            'id',
+            'hospitalid',
+          ))) {
+            $name = '_' . $name;
+          }
+          $this->$name = $value;
+        }
+      }   
+      
+    /*if($this->checkUser($this->username)) {
+      $this->save();
+    }*/
+  }
+
+    function __get($name) {
+
+    // Attempt to return a protected property by name
+    $protected_property_name = '_'. $name;
+    if(property_exists($this, $protected_property_name)) {
+      return $this->$protected_property_name;
     }
 
-    function __set($name, $value) {
-			if($name == 'id') {
-				$this->$name = $value;
-				return;
-			}
-			trigger_error('Unable to access property via __set:'.$name);
-				return NULL;
-		}
+      trigger_error('Unable to access property via __get:'.$name);
+      return NULL;
+  }
 
-		/**
-		*magic get method
-		*returns property
-		**/
-		function __get($name) {
-			$property = '_'.$name;
-			if(property_exists($this, $property)) {
-				return $property;
+  /**
+  *magic set method
+  *takes a property value and sets the value
+  **/
+  function __set($name, $value) {
+    if('id' == $name) {
+      $this->$name = $value;
+      return;
+    }
+    trigger_error('Unable to access property via __set:'.$name);
+      return NULL;
+  }
 
-				trigger_error('Unable to access property via __get:'.$name);
-				return NULL;
-		}
-
-	}
-
-    public function login($user_id, $password)
+    public function login()
     {
-        $this->_password = $password;
+        $user_id = $this->_id;
+        $password = $this->_password;
         $user = $this->_checkCredentials($user_id, $password);
         if ($user) {
             $this->_user = $user; // store it so it can be accessed later
@@ -71,9 +91,9 @@
 
     protected function _checkCredentials($user_id, $password)
     {
-      $db = $this->_db;
+      $db = Database::getInstance();
       $mysqli = $db->getConnection();
-      $sql = 'SELECT * from users where userid = "'.$user_id.'" ';
+      $sql = 'SELECT * from users where user_id = "'.$user_id.'" ';
       $result = $mysqli->query($sql);
 
         if ($row = $result->fetch_assoc()) {
@@ -94,50 +114,27 @@
         return false;
     }
 
-    public function register($data = array()) {
-      $this->_time_created = time();
-      if(!is_array($data)) {
-        trigger_error('unable to construct class with: '.get_class($data));
-      }
-      if(count($data) > 0) {
-				foreach($data as $name => $value) {
-					if(in_array($name,array(
-						'name',
-            'email',
-						'hospitalid',
-						'password',
-
-					))) {
-						$name = '_'.$name;
-					}
-          $this->$name = $value;
-          
-        }
-        
-			}
-
-      if(Hospital::ValidateID($this->_hospitalid)) {
+    public function register() {
         $regdata = array(
-          'username' => $this->_id,
-          'name' => $this->_name,
-          'email' => $this->_email,
-          'hospitalid' => $this->_hospitalid,
-      );
-        $this->_user = new Admin($regdata);
-        if($this->_user) {
-          $mysqli = $this->_db->getConnection();
-          $sql = "Insert into users(user_id, name, email, password, created_at) values ('$this->_id','$this->_name','$this->_email','$this->_password',time())";
-          $result = $mysqli->query($sql);
-          if($result) {
-            $flag = "Account has been created";
-            return $flag;
+        'username' => "$this->_id",
+        'name' => "$this->name",
+        'email' => "$this->_email",
+        'hospitalid' => "$this->_hospitalid",
+        );
+
+        $admin = new Admin($regdata);
+        $new_admin = $admin->saveDetails();  
+			 if($new_admin) {
+
+          $user = $this->saveUser();
+
+          if($user) {
+            return true;
           }
-          return false;
-        }
-        return false;
-      }
-      return false;
-    }
+          
+          }
+       }
+      
 
     public function getUser()
     {
@@ -169,6 +166,26 @@
       }
       return false;
     }*/
+
+    function saveUser() {
+      $db = Database::getInstance();
+      $mysqli = $db->getConnection();
+
+      $user_id = $this->_id;
+      $password = $this->_password;
+      $sql = "INSERT INTO users "
+      . "VALUES ('$user_id', '$password') ";
+
+
+      if($mysqli->query($sql)) {
+        $_SESSION['user_id'] = $user_id;
+        return true;
+      }
+
+      $this->error_msg = 'Unable to register user';
+      return false;
+    }
   }
+
 
  ?>

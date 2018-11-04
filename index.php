@@ -6,16 +6,18 @@ include 'includes/class.' . $class_name . '.inc';
 
 
   include_once 'includes/classes.php';
+      session_start();
   //include 'includes/register.php';
 
 
   $user = new User();
+
   if(isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
     $password = $_POST['password'];
     $error = " ";
     $userinfo = $user->login($user_id, $password);
-    session_start();
+
     if($userinfo) {
       if(preg_match('/pat$/', $userinfo)) {
         $_SESSION['user_id'] = $userinfo;
@@ -42,7 +44,7 @@ include 'includes/class.' . $class_name . '.inc';
         return false;
       }
       $data = array(
-        'id'=>$_POST['user_id'],
+        'id' => $_POST['user_id'],
         'name' => $_POST['name'],
         'email' => $_POST['email'],
         'hospitalid' => $_POST['hospitalid'],
