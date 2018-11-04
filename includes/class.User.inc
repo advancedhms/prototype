@@ -82,8 +82,8 @@
         $user = $this->_checkCredentials($user_id, $password);
         if ($user) {
             $this->_user = $user; // store it so it can be accessed later
-            $_SESSION['user_id'] = $user['userid'];
-            return $user['userid'];
+            $_SESSION['user_id'] = $user['user_id'];
+            return $user['user_id'];
         }
 
         return false;
@@ -129,10 +129,12 @@
           $user = $this->saveUser();
 
           if($user) {
-            return true;
+            return $this->login();
           }
           
           }
+
+          return false;
        }
       
 

@@ -163,8 +163,8 @@ class Admin{
    $hospitalid = $this->hospitalid;
 
    if($this->checkUser($username)) {
-
-    if(Hospital::ValidateID($hospitalid)){
+    $hospital = new Hospital($hospitalid);
+    if($hospital->ValidateID()){
       $sql = "INSERT INTO admin "
          ." VALUES('$username', '$name' ,'$email' , '$hospitalid')";
                 
@@ -173,12 +173,13 @@ class Admin{
             return true;
          }
          else {
-          $this->error_msg = 'Unable to register Admin';
+          trigger_error("unable to add admin");
           return false;
          }
     }
+    return false;
    }
-
+   trigger_error("Unable to save Details");
    return false;
 
 
