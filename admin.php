@@ -4,6 +4,7 @@
 }
 */
 include_once 'includes/classes.php';
+header('Content-type: application/json; charset=utf-8');
   session_start();
   $userid = '';
   $password = '';
@@ -27,6 +28,18 @@ include_once 'includes/classes.php';
       echo "<script> alert('Doctor account successfully created'); </script>";
     }
   }
+  
+
+  
+  /*if(isset($_POST['one'])){
+    $json = array();
+    while ($ids){
+       $user=$ids;
+        array_push($json,$user);
+    }
+    echo json_encode($json, true);
+    
+  }*/
 
  ?>
 <!DOCTYPE html>
@@ -179,8 +192,9 @@ include_once 'includes/classes.php';
                       <form action="admin.php" method="post">
                           <div class="form-row">
                             <div class="form-group col-md-6">
-                              <label for="inputEmail4">UserID</label>
-                              <input type="text" name="patientID" class="form-control" id="Patient" placeholder="Patient ID">
+                              <label for="inputEmail4">Patient ID</label>
+                              <input type="text" name="patientID" class="form-control" id="patient" placeholder="Patient ID">
+                              <div id="patientids"></div>
                             </div>
                             <div class="form-group col-md-6">
                               <label for="inputPassword4">Password</label>
@@ -205,7 +219,7 @@ include_once 'includes/classes.php';
                     <form action="admin.php" method="post">
                         <div class="form-row">
                           <div class="form-group col-md-6">
-                            <label for="inputEmail4">UserID</label>
+                            <label for="inputEmail4">Doctor ID</label>
                             <input type="text" name="doctorID" class="form-control" id="Patient" placeholder="Doctor ID">
                           </div>
                           <div class="form-group col-md-6">
@@ -220,7 +234,7 @@ include_once 'includes/classes.php';
 
                             <button type="button"onClick="generate()" class="btn btn-outline-success">Gen Password</button>
                           </div>
-                          <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                          <button type="submit" name="registerDoctor" class="btn btn-primary">Register</button>
                         </div>
 
                       </form>

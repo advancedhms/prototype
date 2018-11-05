@@ -136,6 +136,18 @@
 			return new Patient($data);
 		}
 
+
+		function getPatients($query) {
+			$db = Database::getInstance();
+			$mysqli = $db->getConnection();
+			$sql = "SELECT * FROM patient WHERE patient_id LIKE '%".$query."%'"; ;
+			$result = $mysql->query($sql);
+		  
+			if($row = $result->fetch_assoc()) {
+			  return $row;
+			}
+			return false;
+		  }
 	}
 	
 ?>

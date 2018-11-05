@@ -156,3 +156,53 @@ $('#exampleModal').on('show.bs.modal', function (event) {
                         }
                     });
                 });
+
+                /* Autofill user id fields 
+                $(document).ready(function(){
+                    $(".input-data").on("change", function(){
+                            var id = $(".input-data").val();
+                            var data = 'one=' + id;
+                            $.ajax({
+                                type: "POST",
+                                url: "process.php",
+                                data: data,
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data) {
+                                        for (var i = 0; i < data.length; i++) { //for each user in the json response
+                                            $(".output-id").val(data[i].id);
+                                        } // for
+                
+                                    } // if
+                                } // success
+                            }); // ajax
+                    });
+                });
+
+
+                $('#patient').autocomplete({
+                    serviceUrl: '../ids.php'
+                });*/
+
+                $(document).ready(function(){  
+                    $('#patient').keyup(function(){  
+                         var query = $(this).val();  
+                         if(query != '')  
+                         {  
+                              $.ajax({  
+                                   url:"search.php",  
+                                   method:"POST",  
+                                   data:{query:query},  
+                                   success:function(data)  
+                                   {  
+                                        $('#patientids').fadeIn();  
+                                        $('#patientids').html(data);  
+                                   }  
+                              });  
+                         }  
+                    });  
+                    $(document).on('click', 'li', function(){  
+                         $('#patient').val($(this).text());  
+                         $('#patientids').fadeOut();  
+                    });  
+               });  

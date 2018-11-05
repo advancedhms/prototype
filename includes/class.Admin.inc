@@ -132,6 +132,7 @@ class Admin{
       }
       else {
         $error_msg = "DoctorID does not exist in the system";
+        return false;
       }
     }
     $error_msg = 'Doctor Account already exists';
@@ -193,6 +194,8 @@ class Admin{
 
 
 } 
+
+
   //final public function save() {}
 
 }
