@@ -1,13 +1,13 @@
-<<?php
-function __autoload($class_name) {
+<?php
+/*function __autoload($class_name) {
   include 'class.' . $class_name . '.inc';
 }
-
-  include 'includes/class.admin.inc';
+*/
+include_once 'includes/classes.php';
   session_start();
   $userid = '';
   $password = '';
-  $admin = new Admin($_SESSION['user_id']);
+  $admin = new Admin;
 
   if(isset($_POST['submitPatient'])) {
     $userid = $_POST['patientID'];
@@ -92,7 +92,7 @@ function __autoload($class_name) {
     <section>
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Hello, <?php echo $_SESSION['user_id']; ?>!</h1>
+          <h1 class="display-4">Hello, <?php echo $_SESSION['name']; ?>!</h1>
           <p class="lead">This is your workspace for handling all administration in the Hospital.</p>
           <hr class="my-4">
           <p>Below is a recap on your recent interractions. Here you can monitor what goes in and out of your database</p>

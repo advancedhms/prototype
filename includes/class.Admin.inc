@@ -118,7 +118,11 @@ class Admin{
 
   }
   public function register_Doctor($Doctor_id, $password) {
-    $user = User::_checkCredentials($doctor_id, $password);
+    $usernew = new User(array(
+      'id' => $patient_id,
+      'password' => $password,
+    ));
+    $user = $usernew->_checkCredentials($patient_id, $password);
     if(!$user) {
       $flag = Doctor::ValidateID($doctor_id);
       if($flag) {
