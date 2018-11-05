@@ -104,9 +104,10 @@ class Admin{
     ));
     $user = $usernew->_checkCredentials($patient_id, $password);
     if(!$user) {
-      $flag = Patient::ValidateID($patient_id);
+      $patient = new Patient;
+      $flag = $patient->ValidateID($patient_id);
       if($flag) {
-        return $user->Register($user);
+        return $user->saveUser();
       }
       else {
         $error_msg = "PatientID does not exist in the system";
@@ -115,14 +116,13 @@ class Admin{
     }
     $error_msg = "Patient Account already exists";
     return false;
-
   }
-  public function register_Doctor($Doctor_id, $password) {
+  public function register_Doctor($doctor_id, $password) {
     $usernew = new User(array(
-      'id' => $patient_id,
+      'id' => $doctor_id,
       'password' => $password,
     ));
-    $user = $usernew->_checkCredentials($patient_id, $password);
+    $user = $usernew->_checkCredentials($doctor_id, $password);
     if(!$user) {
       $flag = Doctor::ValidateID($doctor_id);
       if($flag) {
