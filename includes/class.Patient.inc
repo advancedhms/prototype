@@ -137,10 +137,10 @@
 		}
 
 
-		function getPatients($query) {
+		function getPatients($pattern) {
 			$db = Database::getInstance();
 			$mysqli = $db->getConnection();
-			$sql = "SELECT * FROM patient WHERE patient_id LIKE '%".$query."%'"; ;
+			$sql = "SELECT * FROM patient WHERE patient_id LIKE '%".$pattern."%'"; 
 			$result = $mysql->query($sql);
 		  
 			if($row = $result->fetch_assoc()) {

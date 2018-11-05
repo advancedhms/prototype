@@ -190,7 +190,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
                          if(query != '')  
                          {  
                               $.ajax({  
-                                   url:"search.php",  
+                                   url:"../ids.php",  
                                    method:"POST",  
                                    data:{query:query},  
                                    success:function(data)  

@@ -1,7 +1,7 @@
 <?php
     if(isset($_POST["query"]))  {
         $patients = new Patient;
-        $patient_ids = $patients->getPatients();
+        $patient_ids = $patients->getPatients($_POST["query"]);
         $output = '';
         $output = '<ul class="list-unstyled">';  
         if(mysqli_num_rows($patient_ids) > 0)  
