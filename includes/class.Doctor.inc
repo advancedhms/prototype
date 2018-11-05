@@ -43,6 +43,15 @@ class Doctor{
        trigger_error('Unable to access property via __set: '.$name);
     }
 
+    function ValidateID ($id = '') {
+        if($id = ''){
+            $id = $this->doctor_id;
+        }
+        $db = Database::getInstance();
+        $mysqli = $db->getConnection();
+        $sql = "SELECT * FROM doctor WHERE doctor_id = '$id'";
+    }
+
 }
 
  ?>
