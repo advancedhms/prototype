@@ -124,7 +124,8 @@ class Admin{
     ));
     $user = $usernew->_checkCredentials($doctor_id, $password);
     if(!$user) {
-      $flag = Doctor::ValidateID($doctor_id);
+      $doctor = new Doctor;
+      $flag = $doctor->ValidateID($doctor_id);
       if($flag) {
         return $user->Register($user);
 
