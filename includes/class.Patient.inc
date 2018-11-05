@@ -3,12 +3,12 @@
 		protected $_patient_id;
 		public $patient_name;
 		public $patient_age;
-		protected $_time_created;
+		/*protected $_time_created;
 		protected $_time_updated;
 		protected $_time_logged_in;
 		protected $_time_logged_out;
 		protected $_password;
-
+*/
 		const ERROR_NOT_FOUND = 1000;
 		const ERROR_INCORRECT = 1001;
 
@@ -22,11 +22,6 @@
 				foreach($data as $name => $value) {
 					if(in_array($name,array(
 						'patient_id',
-						'password',
-						'time_created',
-						'time_updated',
-						'time_logged_in',
-						'time_logged_out',
 					))) {
 						$name = '_'.$name;
 					}
@@ -38,29 +33,33 @@
 		*magic set method
 		*takes a property value and sets the value
 		**/
-		function __set($name, $value) {
-			if($name == 'patient_id') {
-				$this->$name = $value;
-				return;
+		function __get($name) {
+
+			// Attempt to return a protected property by name
+			$protected_property_name = '_'. $name;
+			if(property_exists($this, $protected_property_name)) {
+			  return $this->$protected_property_name;
+			}
+		
+			  trigger_error('Unable to access property via __get:'.$name);
+			  return NULL;
+		  }
+		
+		  /**
+		  *magic set method
+		  *takes a property value and sets the value
+		  **/
+		  function __set($name, $value) {
+			if('patient_id' == $name) {
+			  $this->$name = $value;
+			  return;
 			}
 			trigger_error('Unable to access property via __set:'.$name);
-				return NULL;
-		}
-
-		/**
-		*magic get method
-		*returns property
-		**/
-		function __get($name) {
-			$property = '_'.$name;
-			if(property_exists($this, $property)) {
-				return $property;
-
-				trigger_error('Unable to access property via __get:'.$name);
-				return NULL;
-		}
-
-	}
+			  return NULL;
+		  }
+		  /*function __clone() {
+			$this->_time_created = time();
+		  }
 		/**
 		* Magic toSring
 		* returns a display of patient data
