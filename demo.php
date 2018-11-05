@@ -64,3 +64,34 @@
       }
 
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="fontawesome/css/all.css"
+          rel="stylesheet">
+    <link href="css/style.css"
+          rel="stylesheet">
+
+</head>
+<body>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputEmail4">Patient ID</label>
+                              <input type="text" name="patientID" class="form-control" id="patient" placeholder="Patient ID">
+                              <div id="patientids"></div>
+                            </div>
+                            </div>
+
+    <script src="js/jquery-3.3.1.slim.min.js" ></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js" ></script>
+    <script src="js/script.js" ></script>
+</body>
+</html>
