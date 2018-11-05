@@ -22,7 +22,26 @@ class Doctor{
         }
     }
 
-    
+
+    function __get($name)
+    {
+        $protected_property_name = '_'.$name;
+        if(property_exists($this, $protected_property_name)) {
+            return $this->$protected_property_name;
+        }
+
+        trigger_error('Cannot access property via __get: '.$name);
+        return NULL;
+    }
+
+
+    function __set($name, $value) {
+        if('doctor_id' == $name) {
+        $this->$name = $value;
+        return;
+        }
+       trigger_error('Unable to access property via __set: '.$name);
+    }
 
 }
 
