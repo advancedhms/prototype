@@ -114,18 +114,20 @@
 				}
 		 }*/
 
-			function ValidateID($patient_id) {
-				$db = Database::getInstance();
-				$mysqli = $db->getConnection();
-				$sql = 'SELECT * from patient where patientID = "'.$patient_id.'" ';
-				$result = $mysqli->query($sql);
-
-				if($result->num_rows == 0) {
-					throw new ExceptionPatient('User does not exist', Patient::ERROR_NOT_FOUND);
-					return FALSE;
-				}
-				return TRUE;
+		 function ValidateID ($id = '') {
+			if($id = ''){
+				$id = $this->patient_id;
 			}
+			$db = Database::getInstance();
+			$mysqli = $db->getConnection();
+			$sql = "SELECT * FROM patient WHERE patient_id = '$id'";
+			$result = $mysqli->query($sql);
+			if($row = $result->fetch_assoc()) {
+				return true;
+			}
+			trigger_error('Unable to locate user with id: '.$id);
+			return false;
+		}
 
 
 

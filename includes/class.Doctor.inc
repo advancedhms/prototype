@@ -50,6 +50,12 @@ class Doctor{
         $db = Database::getInstance();
         $mysqli = $db->getConnection();
         $sql = "SELECT * FROM doctor WHERE doctor_id = '$id'";
+        $result = $mysqli->query($sql);
+        if($row = $result->fetch_assoc()) {
+            return true;
+        }
+        trigger_error('Unable to locate user with id: '.$id);
+        return false;
     }
 
 }
