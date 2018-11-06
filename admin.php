@@ -244,7 +244,7 @@ include_once 'includes/classes.php';
                                   </div>
                                 </div>
 
-                              <button type="button"onClick="generate()" class="btn btn-outline-success">Gen Password</button>
+                              <button type="button" onClick="generate()" class="btn btn-outline-success">Gen Password</button>
                             </div>
                             <button type="submit" name="submitPatient" class="btn btn-primary">Register</button>
                           </div>
@@ -257,20 +257,20 @@ include_once 'includes/classes.php';
                     <form action="admin.php" method="post">
                         <div class="form-row">
                           <div class="form-group col-md-6">
-                            <label for="inputEmail4">Doctor ID</label>
-                            <input type="text" name="doctor" class="doctor tt-query form-control" id="Patient" placeholder="Doctor ID">
+                            <label for="inputEmail5">Doctor ID</label>
+                            <input type="text" name="doctor" class="doctor tt-query form-control" id="doctor" placeholder="Doctor ID">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="inputPassword4">Password</label>
-                            <div class="input-group mb-3" id="show_hide_password">
-                                <input type="password" name="doctorPassword" class="form-control" id="pass" placeholder="Password">
+                            <div class="input-group mb-3" id="show_hide_password1">
+                                <input type="password" name="doctorPassword" class="form-control" id="passs" placeholder="Password">
                                 <div class="input-group-append">
                                     <a href="" class="btn btn-outline-secondary"><i class="fas fa-eye-slash" aria-hidden="true"></i></i></a>
 
                                 </div>
                               </div>
 
-                            <button type="button"onClick="generateDoc()" class="btn btn-outline-success">Gen Password</button>
+                            <button type="button" onClick="generateDoc();" class="btn btn-outline-success">Gen Password</button>
                           </div>
                           <button type="submit" name="submitDoctor" class="btn btn-primary">Register</button>
                         </div>
@@ -314,6 +314,7 @@ include_once 'includes/classes.php';
     </div>
     <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/password.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>

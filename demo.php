@@ -89,12 +89,17 @@ include_once 'includes/classes.php';
     <div class="bs-example">
         <input type="text" name="patient" class="patient tt-query" autocomplete="off" spellcheck="false" placeholder="Type your Query">
     </div>
+    <input type="text" id="password">
+    <button onclick="$('#password').val(password.generate());">
+  Generate Password
+</button>
   </div>
   </div>
   </div>
 
 <script src="js/jquery-3.3.1.slim.min.js"></script>
 <script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/password.js"></script>
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="typeahead.min.js"></script>

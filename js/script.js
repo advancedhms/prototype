@@ -130,7 +130,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
         
                     // 1) You can add special characters like "@" to the following string if desired
                     // 2) You can even include characters more than once to increase their likelihood of appearing!
-                    var availChars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ#$!_-%*";
+                    var availChars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ#$!_-%*@()&";
                     var pw = "";
                     for (i = 0; i < pwLength; i++) {
                         charPos = Math.floor(Math.random() * availChars.length);
@@ -148,17 +148,31 @@ $('#exampleModal').on('show.bs.modal', function (event) {
         
                     // 1) You can add special characters like "@" to the following string if desired
                     // 2) You can even include characters more than once to increase their likelihood of appearing!
-                    var availChars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ#$!_-%*";
+                    var availChars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ#$!_-%*@()+";
                     var pw = "";
                     for (i = 0; i < pwLength; i++) {
                         charPos = Math.floor(Math.random() * availChars.length);
                         pwChar = availChars.charAt(charPos);
                         pw = pw + pwChar;
                     }
-                    pass.value = pw;
+                    var password = document.getElementById('passs');
+                    password.value = pw;
         
+                }/*
+                function randomPassword(length) {
+                    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+                    var passs = "";
+                    for (var x = 0; x < length; x++) {
+                        var i = Math.floor(Math.random() * chars.length);
+                        passs += chars.charAt(i);
+                    }
+                    return passs;
                 }
-
+                
+                function generateDoc() {
+                    doctorForm.doctorPassword.value = randomPassword(doctorForm.length.value);
+                }
+*/
                 /*Show and hide password */
                 $(document).ready(function() {
                     $("#show_hide_password a").on('click', function(event) {
@@ -171,6 +185,21 @@ $('#exampleModal').on('show.bs.modal', function (event) {
                             $('#show_hide_password input').attr('type', 'text');
                             $('#show_hide_password i').removeClass( "fas fa-eye-slash" );
                             $('#show_hide_password i').addClass( "fas fa-eye" );
+                        }
+                    });
+                });
+                /*Show and hide password */
+                $(document).ready(function() {
+                    $("#show_hide_password1 a").on('click', function(event) {
+                        event.preventDefault();
+                        if($('#show_hide_password1 input').attr("type") == "text"){
+                            $('#show_hide_password1 input').attr('type', 'password');
+                            $('#show_hide_password1 i').addClass( "fas fa-eye-slash" );
+                            $('#show_hide_password1 i').removeClass( "fas fa-eye" );
+                        }else if($('#show_hide_password1 input').attr("type") == "password"){
+                            $('#show_hide_password1 input').attr('type', 'text');
+                            $('#show_hide_password1 i').removeClass( "fas fa-eye-slash" );
+                            $('#show_hide_password1 i').addClass( "fas fa-eye" );
                         }
                     });
                 });
