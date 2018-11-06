@@ -23,7 +23,7 @@ include_once 'includes/classes.php';
     }
   }
   elseif (isset($_POST['submitDoctor'])) {
-    $userid = $_POST['doctorID'];
+    $userid = $_POST['doctor'];
     $password = $_POST['doctorPassword'];
 
     $doctor = $admin->register_Doctor($user_id, $password);
@@ -270,9 +270,9 @@ include_once 'includes/classes.php';
                                 </div>
                               </div>
 
-                            <button type="button"onClick="generate()" class="btn btn-outline-success">Gen Password</button>
+                            <button type="button"onClick="generateDoc()" class="btn btn-outline-success">Gen Password</button>
                           </div>
-                          <button type="submit" name="registerDoctor" class="btn btn-primary">Register</button>
+                          <button type="submit" name="submitDoctor" class="btn btn-primary">Register</button>
                         </div>
 
                       </form>
