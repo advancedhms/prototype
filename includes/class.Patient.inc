@@ -137,15 +137,16 @@
 		}
 
 
-		function getPatients($pattern) {
+		public final static function getPatients($pattern) {
 			$db = Database::getInstance();
 			$mysqli = $db->getConnection();
-			$sql = "SELECT * FROM patient WHERE patient_id LIKE '%".$pattern."%'"; 
-			$result = $mysql->query($sql);
+			$sql = "SELECT * FROM patient WHERE patient_id LIKE '%{$pattern}%'"; 
+			$result = $mysqli->query($sql);
 		  
 			if($row = $result->fetch_assoc()) {
-			  return $row;
+				return $row;
 			}
+			trigger_error('cannot load patterns');
 			return false;
 		  }
 	}

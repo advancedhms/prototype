@@ -1,70 +1,3 @@
-<?php 
-	require 'includes/classes.php';
-  session_start();
-	//$user = new User;
-	//echo "<tt><pre>".var_export($user, true)."</pre></tt>";
-
-	    $data = array(
-	    'id' => 'markadmin',
-        'password' => 'kuiler',        
-      );
-
-     /* $new_user = $user->register($data);
-     echo "<br/>";*/
-    /* $regdata = array(
-          'username' => 'admin',
-          'name' => 'Isaac Botwe',
-          'email' => "$data['email']",
-          'hospitalid' => "$data['hospitalid']",
-      ); */
-     /*$new_user = new Admin(array(
-	    'username' => 'admin',
-        'name' => 'Isaac Botwe',
-        'email' => 'isaacbotwe7@gmail.com',
-        'hospitalid' => 'hosp1234',
-        
-      ));*/
-      $user = new User($data);
-    
-     /*$new_user->username = $data['username'];
-     $new_user->name = $data['name'];
-     $new_user->email=$data['email'];
-     $new_user->hospitalid=$data['hospitalid'];
-     $new_user->save();
-
-      echo "<tt><pre>".var_export($new_user, true)."</pre></tt>";
-      echo $new_user->display();
-      echo "<br/>";
-      $user = $new_user->saveDetails();
-      if($user) {
-        echo "Registration Succesfull";
-      }
-      else {
-        echo "Registeration Unsuccessful";
-      }
-      echo "<br/>";*/
-    /*  $new_admin_user = new User($data);
-
-      echo "<tt><pre>". var_export($new_admin_user, true)   ."</pre></tt>";
-      $user = $new_admin_user->register();
-      if($user && $data['id'] == $_SESSION['user_id']) {
-        header('Location: admin.php');
-      }
-      else {
-        echo "Registeration unsuccesfull";
-      }*/
-
-      echo "<tt><pre>". var_export($user, true)   ."</pre></tt>";
-      $new_user = $user->login();
-      if($new_user) {
-        header('Location: admin.php');
-      }
-      else {
-        echo "Login unsuccessfull";
-      }
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,26 +5,92 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/bootstrap.min.css"
-          rel="stylesheet">
-    <link href="fontawesome/css/all.css"
-          rel="stylesheet">
-    <link href="css/style.css"
-          rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<style type="text/css">
+.bs-example{
+	font-family: sans-serif;
+	position: relative;
+	margin: 50px;
+}
+.typeahead, .tt-query, .tt-hint {
+	border: 2px solid #CCCCCC;
+	border-radius: 8px;
+	font-size: 24px;
+	height: 30px;
+	line-height: 30px;
+	outline: medium none;
+	padding: 8px 12px;
+	width: 396px;
+}
+.typeahead {
+	background-color: #FFFFFF;
+}
+.typeahead:focus {
+	border: 2px solid #0097CF;
+}
+.tt-query {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.tt-hint {
+	color: #999999;
+}
+.tt-dropdown-menu {
+	background-color: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	margin-top: 12px;
+	padding: 8px 0;
+	width: 422px;
+}
+.tt-suggestion {
+	font-size: 24px;
+	line-height: 24px;
+	padding: 3px 20px;
+}
+.tt-suggestion.tt-is-under-cursor {
+	background-color: #0097CF;
+	color: #FFFFFF;
+}
+.tt-suggestion p {
+	margin: 0;
+}
+</style>
 
 </head>
 <body>
-                          <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <label for="inputEmail4">Patient ID</label>
-                              <input type="text" name="patientID" class="form-control" id="patient" placeholder="Patient ID">
-                              <div id="patientids"></div>
-                            </div>
-                            </div>
+<div class="row">
+      <div class=".col-md-6">
+        <div class="jumbotron">
+        <h1>Ajax Search Box using Node and MySQL <small>Codeforgeek Tutorial</small></h1>
+         <button type="button" class="btn btn-primary btn-lg">Visit Tutorial</button>
+      </div>
+  </div>
+  <div class=".col-md-6">
+    <div class="panel panel-default">
+    <div class="bs-example">
+        <input type="text" name="patient" class="patient tt-query" autocomplete="off" spellcheck="false" placeholder="Type your Query">
+    </div>
+  </div>
+  </div>
+  </div>
 
-    <script src="js/jquery-3.3.1.slim.min.js" ></script>
-    <script src="js/popper.min.js" ></script>
-    <script src="js/bootstrap.min.js" ></script>
-    <script src="js/script.js" ></script>
+<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="typeahead.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    $('input.patient').typeahead({
+        name: 'patient',
+        remote:'ids.php?key=%QUERY',
+        limit : 10
+    });
+});
+</script>
 </body>
 </html>

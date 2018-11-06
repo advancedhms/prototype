@@ -4,7 +4,7 @@
 }
 */
 include_once 'includes/classes.php';
-header('Content-type: application/json; charset=utf-8');
+
   session_start();
   $userid = '';
   $password = '';
@@ -28,18 +28,7 @@ header('Content-type: application/json; charset=utf-8');
       echo "<script> alert('Doctor account successfully created'); </script>";
     }
   }
-  
 
-  
-  /*if(isset($_POST['one'])){
-    $json = array();
-    while ($ids){
-       $user=$ids;
-        array_push($json,$user);
-    }
-    echo json_encode($json, true);
-    
-  }*/
 
  ?>
 <!DOCTYPE html>
@@ -57,6 +46,52 @@ header('Content-type: application/json; charset=utf-8');
           rel="stylesheet">
     <link href="css/style.css"
           rel="stylesheet">
+
+          <style>
+.tt-hint {
+
+  display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+/*.tt-query {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}*/
+.tt-hint {
+	color: #999999;
+}
+.tt-dropdown-menu {
+	background-color: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	margin-top: 12px;
+	padding: 8px 0;
+	width: 422px;
+}
+/*.tt-suggestion {
+	font-size: 24px;
+	line-height: 24px;
+	padding: 3px 20px;
+}*/
+.tt-suggestion.tt-is-under-cursor {
+	background-color: #0097CF;
+	color: #FFFFFF;
+}
+.tt-suggestion p {
+	margin: 0;
+}
+          </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -193,8 +228,7 @@ header('Content-type: application/json; charset=utf-8');
                           <div class="form-row">
                             <div class="form-group col-md-6">
                               <label for="inputEmail4">Patient ID</label>
-                              <input type="text" name="patientID" class="form-control" id="patient" placeholder="Patient ID">
-                              <div id="patientids"></div>
+                              <input type="text" name="patient" class="patient tt-query form-control" autocomplete = "off" spellcheck="false" id="patient" placeholder="Patient ID">
                             </div>
                             <div class="form-group col-md-6">
                               <label for="inputPassword4">Password</label>
@@ -275,8 +309,19 @@ header('Content-type: application/json; charset=utf-8');
       </div>
     </div>
     <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="typeahead.min.js"></script>
+    <script>
+      $(document).ready(function(){
+    $('input.patient').typeahead({
+        name: 'patient',
+        remote:'ids.php?key=%QUERY',
+        limit : 10
+    });
+});  
+    </script>
   </body>
 </html>

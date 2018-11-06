@@ -184,25 +184,4 @@ $('#exampleModal').on('show.bs.modal', function (event) {
                     serviceUrl: '../ids.php'
                 });*/
 
-                $(document).ready(function(){  
-                    $('#patient').keyup(function(){  
-                         var query = $(this).val();  
-                         if(query != '')  
-                         {  
-                              $.ajax({  
-                                   url:"../ids.php",  
-                                   method:"POST",  
-                                   data:{query:query},  
-                                   success:function(data)  
-                                   {  
-                                        $('#patientids').fadeIn();  
-                                        $('#patientids').html(data);  
-                                   }  
-                              });  
-                         }  
-                    });  
-                    $(document).on('click', 'li', function(){  
-                         $('#patient').val($(this).text());  
-                         $('#patientids').fadeOut();  
-                    });  
-               });  
+                
