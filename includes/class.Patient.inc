@@ -14,7 +14,6 @@
 
 
 		function __construct($data = array()) {
-			$this->_time_created = time();
 			if(!is_array($data)) {
 				trigger_error('unable to construct class with: '.get_class($data));
 			}
@@ -115,7 +114,7 @@
 		 }*/
 
 		 function ValidateID ($id = '') {
-			if($id = ''){
+			if($id == ''){
 				$id = $this->patient_id;
 			}
 			$db = Database::getInstance();

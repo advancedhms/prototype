@@ -9,14 +9,17 @@ include_once 'includes/classes.php';
   $userid = '';
   $password = '';
   $admin = new Admin;
+  $adminDetails = $admin->getDetails($_SESSION['user_id']);
+
 
   if(isset($_POST['submitPatient'])) {
-    $userid = $_POST['patientID'];
-    $password = $_POST['patientPassword'];
-
+    $userid = intval($_POST['patient']);
+    $password = ($_POST['patientPassword']);
+    echo var_dump('userid');
     $patient = $admin->register_Patient($userid, $password);
     if($patient) {
       echo "<script> alert('Patient account successfully created'); </script>";
+      header('Location: index.php');
     }
   }
   elseif (isset($_POST['submitDoctor'])) {
@@ -28,6 +31,7 @@ include_once 'includes/classes.php';
       echo "<script> alert('Doctor account successfully created'); </script>";
     }
   }
+  
 
 
  ?>
@@ -140,7 +144,7 @@ include_once 'includes/classes.php';
     <section>
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Hello, <?php echo $_SESSION['name']; ?>!</h1>
+          <h1 class="display-4">Hello, <?php echo $adminDetails['name'] ?>!</h1>
           <p class="lead">This is your workspace for handling all administration in the Hospital.</p>
           <hr class="my-4">
           <p>Below is a recap on your recent interractions. Here you can monitor what goes in and out of your database</p>
@@ -242,7 +246,7 @@ include_once 'includes/classes.php';
 
                               <button type="button"onClick="generate()" class="btn btn-outline-success">Gen Password</button>
                             </div>
-                            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" name="submitPatient" class="btn btn-primary">Register</button>
                           </div>
 
                         </form>

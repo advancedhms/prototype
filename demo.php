@@ -1,3 +1,18 @@
+
+<?php
+
+include_once 'includes/classes.php';
+ $id = 1006858;
+ $password = 'kuilerf';
+ 
+ $admin = new Admin;
+ $user = $admin->register_Patient($id, $password);
+
+
+ echo var_dump($user);
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

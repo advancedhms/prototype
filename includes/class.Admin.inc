@@ -98,6 +98,7 @@ class Admin{
   
 
   public function register_Patient($patient_id, $password) {
+
     $usernew = new User(array(
       'id' => $patient_id,
       'password' => $password,
@@ -107,14 +108,14 @@ class Admin{
       $patient = new Patient;
       $flag = $patient->ValidateID($patient_id);
       if($flag) {
-        return $user->saveUser();
+        return $usernew->saveUser();
       }
       else {
-        $error_msg = "PatientID does not exist in the system";
+        trigger_error("PatientID does not exist in the system");
         return false;
       }
     }
-    $error_msg = "Patient Account already exists";
+    trigger_error("Patient Account already exists");
     return false;
   }
   public function register_Doctor($doctor_id, $password) {
@@ -195,6 +196,17 @@ class Admin{
 
 } 
 
+function getDetails($id = '') {
+  if($id == '') {
+   $id = $this->username;
+  }
+  $db = Database::getInstance();
+  $mysqli = $db->getConnection();
+  $sql = "SELECT * FROM admin WHERE username = '$id'";
+
+  $result = $mysqli->query($sql);
+  return $result->fetch_assoc();
+}
 
   //final public function save() {}
 
