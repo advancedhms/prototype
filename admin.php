@@ -254,7 +254,7 @@ include_once 'includes/classes.php';
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="inputEmail4">Doctor ID</label>
-                            <input type="text" name="doctorID" class="form-control" id="Patient" placeholder="Doctor ID">
+                            <input type="text" name="doctor" class="doctor tt-query form-control" id="Patient" placeholder="Doctor ID">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="inputPassword4">Password</label>
@@ -321,7 +321,13 @@ include_once 'includes/classes.php';
         remote:'ids.php?key=%QUERY',
         limit : 10
     });
+    $('input.doctor').typeahead({
+        name: 'doctor',
+        remote:'ids-doctor.php?key=%QUERY',
+        limit : 10
+    });
 });  
+
     </script>
   </body>
 </html>
