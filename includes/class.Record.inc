@@ -7,6 +7,7 @@
         public $prescription;
         public $remarks;
         protected $_doctor_id;
+        public $doctor_name;
         protected $_hospital_id;
         public $hospital_name;
         public $time_created;

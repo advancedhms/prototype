@@ -8,7 +8,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   modal.find('.modal-body input').val(recipient)
 })
 
-/* Chatroom */
+/* Chatroom 
 //this function can remove a array element.
             Array.remove = function(array, from, to) {
                 var rest = array.slice((to || from) + 1 || array.length);

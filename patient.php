@@ -92,7 +92,6 @@
               <h3 class="text-center text-info">Medical Records</h3>
               <thead class="thead-light">
                 <tr>
-                  <th scope="col">#</th>
                   <th scope="col">Temperature &#x2103</th>
                   <th scope="col">Blood Pressure mmHg</th>
                   <th scope="col">Diagnosis</th>
@@ -103,37 +102,17 @@
                 </tr>
               </thead>
               <tbody>
-              <?php foreach($records as $record) {  ?>
+            <?php foreach($records as $record) { ?>
                 <tr>
-                  <th scope="row">1</th>
-                  <td>36.1</td>
-                  <td>120/80</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
+                  <td><?php echo $record->temp; ?></td>
+                  <td><?php echo $record->bp; ?></td>
+                  <td><?php echo $record->diagnosis; ?></td>
+                  <td><?php echo $record->prescription; ?></td>
+                  <td><?php echo $record->remarks; ?></td>
+                  <td><?php echo $record->doctor_name; ?></td>
                   <td>@mdo</td>
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>@fat</td>
-                  <td>@fat</td>
-                  <td>@fat</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                  <td>@twitter</td>
-                  <td>@twitter</td>
-                  <td>@twitter</td>
-                  <td>@twitter</td>
-                </tr>
+              <?php  } ?>
               </tbody>
             </table>
           </div>
@@ -211,11 +190,11 @@
       <i class="far fa-3x fa-comment-alt"></i>
     </a>
   </div>
-   -->
+   
    <div class="chat-sidebar">
     <h4>Chatroom</h4>
             <div class="sidebar-name">
-                <!-- Pass username and display name to register popup -->
+                <!-- Pass username and display name to register popup 
                 <a href="javascript:register_popup('Dr.Owusu', 'Dr. Owusu');">
                     <img width="30" height="30" src="images/profile.jpg" />
                     <span>Dr. Owusu</span>
@@ -229,7 +208,7 @@
             </div>
         </div>
 
-
+-->
 
     <script src="js/jquery-3.3.1.slim.min.js" ></script>
     <script src="js/popper.min.js" ></script>
