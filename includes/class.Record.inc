@@ -1,6 +1,7 @@
 <?php
     class Record {
         protected $_recordID;
+        protected $patientID;
         public $temp;
         public $bp;
         protected $_diagnosis;
@@ -31,6 +32,39 @@
                 }
             }
         }
+
+        function __get($name)
+        {
+            $protected_property_name = '_'.$name;
+            if(property_exists($this, $protected_property_name)) {
+                return $this->$protected_property_name;
+            }
+    
+            trigger_error('Cannot access property via __get: '.$name);
+            return NULL;
+        }
+    
+    
+        function __set($name, $value) {
+            if('recordID' == $name || 'patient_id' == $name) {
+            $this->$name = $value;
+            return;
+            }
+           trigger_error('Unable to access property via __set: '.$name);
+        }
+
+        public static function getRecords($patientID){
+            $db = Database::getInstance();
+            $mysqli = $db->getConnection();
+            $sql = "SELECT * FROM patient WHERE patient_id = '$patientID'";
+            $result = $mysqli->query($sql);
+
+            if($row = $result->fetch_assoc()) {
+                return $row;
+            }
+            trigger_error('Unable to fetch medical records');
+        }
+
     }
 
 ?>

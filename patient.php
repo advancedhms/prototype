@@ -1,3 +1,10 @@
+<?php
+  include_once 'includes/classes.php';
+  $records = Record::getRecords($_SESSION['user_id']);
+
+
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -110,7 +117,7 @@
                   <td><?php echo $record->prescription; ?></td>
                   <td><?php echo $record->remarks; ?></td>
                   <td><?php echo $record->doctor_name; ?></td>
-                  <td>@mdo</td>
+                  <td><?php echo $record->hospital_name; ?></td>
                 </tr>
               <?php  } ?>
               </tbody>

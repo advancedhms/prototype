@@ -36,6 +36,10 @@ include 'includes/class.' . $class_name . '.inc';
         $_SESSION['user_id'] = $userinfo;
         header('Location: pharm.html');
       }
+      else {
+        $_SESSION['user_id'] = $userinfo;
+        header('Location: patient.php');
+      }
 
     }
     else {
