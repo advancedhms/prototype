@@ -103,6 +103,7 @@
                 </tr>
               </thead>
               <tbody>
+              <?php foreach($records as $record) {  ?>
                 <tr>
                   <th scope="row">1</th>
                   <td>36.1</td>

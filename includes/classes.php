@@ -5,5 +5,6 @@
     require 'class.Patient.inc';
     require 'class.Admin.inc';
     require 'class.Doctor.inc';
+    require 'class.Record.inc';
 
 ?>

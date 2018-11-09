@@ -39,7 +39,9 @@ include 'includes/class.' . $class_name . '.inc';
 
     }
     else {
-      $error =  $user->error_message;
+      echo "<span>$user->error_message</span>";
+      $doc = new DOMDocument();
+      $a = $doc->getElementById('error');
     }
 
     }
@@ -102,8 +104,9 @@ include 'includes/class.' . $class_name . '.inc';
                   <!-- Login Form -->
 
                   <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
-                    <span><?php echo $error; ?></span>
+                   
                     <h5 class="card-title text-center">Login</h5>
+                    <span id"error"></span>
                     <form class="form-signin" method="post" action="index.php">
                       <div class="form-label-group">
                         <input type="text" name="user_id" id="userid" class="form-control" placeholder="Username" required autofocus>

@@ -15,18 +15,16 @@ include_once 'includes/classes.php';
   if(isset($_POST['submitPatient'])) {
     $userid = intval($_POST['patient']);
     $password = ($_POST['patientPassword']);
-    echo var_dump('userid');
     $patient = $admin->register_Patient($userid, $password);
     if($patient) {
-      echo "<script> alert('Patient account successfully created'); </script>";
-      header('Location: index.php');
+      //mail($admin_email, "$subject", $comment, "From:" . $email);
     }
   }
   elseif (isset($_POST['submitDoctor'])) {
-    $userid = $_POST['doctor'];
+    $userid = intval($_POST['doctor']);
     $password = $_POST['doctorPassword'];
 
-    $doctor = $admin->register_Doctor($user_id, $password);
+    $doctor = $admin->register_Doctor($userid, $password);
     if($doctor) {
       echo "<script> alert('Doctor account successfully created'); </script>";
     }
@@ -192,16 +190,13 @@ include_once 'includes/classes.php';
           </li>
           <li class="nav-item">
             <a class="nav-link"
-                href="#">Update <i class="fas fa-pen-square"></i></a>
+                href="#">Settings <i class="fas fa-cogs"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link"
-                href="#"></a>
+                href="index.php">Logout <i class="fas fa-sign-out-alt"></i></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled"
-                href="#">Disabled</a>
-          </li>
+
         </ul>
       </div>
     </nav>
