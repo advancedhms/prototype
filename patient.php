@@ -1,5 +1,6 @@
 <?php
   include_once 'includes/classes.php';
+  session_start();
   $records = Record::getRecords($_SESSION['user_id']);
 
 

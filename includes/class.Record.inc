@@ -21,7 +21,8 @@
             $this->time_created = time();
             if(count($data) > 0) {
                 foreach($data as $name => $value){      
-                    if(in_array($data, array(       //Set protected property names to begin with a _                        'recordID',
+                    if(in_array($data, array(       //Set protected property names to begin with a _ 
+                        'recordID',
                         'diagnosis',
                         'doctor_id',
                         'hospital_id',
@@ -56,7 +57,7 @@
         public static function getRecords($patientID){
             $db = Database::getInstance();
             $mysqli = $db->getConnection();
-            $sql = "SELECT * FROM patient WHERE patient_id = '$patientID'";
+            $sql = "SELECT * FROM record WHERE patient_id = '$patientID'";
             $result = $mysqli->query($sql);
 
             if($row = $result->fetch_assoc()) {

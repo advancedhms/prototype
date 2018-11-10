@@ -11,6 +11,40 @@ include_once 'includes/classes.php';
 
  echo var_dump($user);
 
+ $patientid = 1005;
+ $records = Record::getRecords($patientid);
+ echo "<tt><pre>".var_export($records, true) ."</pre></tt>";
+
+ foreach($records as $record) {
+   echo "<table>";
+   echo  "<tr>";
+   echo "<td>";
+    echo $record; 
+    echo "</td>";
+   echo "<td>";
+    echo $record; 
+    echo "</td>";
+   echo "<td>";
+  echo $record; 
+  echo "</td>";
+   echo "<td>";
+   echo $record->prescription;
+   echo "</td>";
+   echo "<td>";
+   echo $record->remarks;
+   echo "</td>";
+   echo "<td>";
+   echo $record->doctor_name; 
+   echo "</td>";
+   echo "<td>";
+   echo $record->hospital_name;
+   echo "</td>";
+ echo "</tr>";
+   
+   
+   echo "</table>";
+ }
+
 ?>
 
 <!DOCTYPE html>
