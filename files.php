@@ -16,7 +16,7 @@ margin:0;
 padding:0;
 background:#ccc;
 }
-.thumbnails{a
+.thumbnails{
 	width:30%;
 	float: left;
 	margin:10px;
