@@ -1,7 +1,11 @@
 <?php
   include_once 'includes/classes.php';
   session_start();
-  $records = Record::getRecords($_SESSION['user_id']);
+  $patientid = $_SESSION['user_id'];
+  $db = Database::getInstance();
+  $mysqli = $db->getConnection();
+  $sql = "SELECT * FROM record WHERE patient_id = '$patientid' ORDER BY";
+  $result = $mysqli->query($sql);
 
 
 ?>
@@ -110,15 +114,15 @@
                 </tr>
               </thead>
               <tbody>
-            <?php foreach($records as $record) { ?>
+            <?php while($record = $result->fetch_array()) { ?>
                 <tr>
-                  <td><?php echo $record->temp; ?></td>
-                  <td><?php echo $record->bp; ?></td>
-                  <td><?php echo $record->diagnosis; ?></td>
-                  <td><?php echo $record->prescription; ?></td>
-                  <td><?php echo $record->remarks; ?></td>
-                  <td><?php echo $record->doctor_name; ?></td>
-                  <td><?php echo $record->hospital_name; ?></td>
+                  <td><?php echo $record[1]; ?></td>
+                  <td><?php echo $record[2]; ?></td>
+                  <td><?php echo $record[3]; ?></td>
+                  <td><?php echo $record[4]; ?></td>
+                  <td><?php echo $record[5]; ?></td>
+                  <td><?php echo $record[6]; ?></td>
+                  <td><?php echo $record[7]; ?></td>
                 </tr>
               <?php  } ?>
               </tbody>

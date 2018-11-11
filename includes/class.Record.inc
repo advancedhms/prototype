@@ -60,7 +60,7 @@
             $sql = "SELECT * FROM record WHERE patient_id = '$patientID'";
             $result = $mysqli->query($sql);
 
-            if($row = $result->fetch_assoc()) {
+            if($row = $result->fetch_array()) {
                 return $row;
             }
             trigger_error('Unable to fetch medical records');

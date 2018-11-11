@@ -15,35 +15,61 @@ include_once 'includes/classes.php';
  $records = Record::getRecords($patientid);
  echo "<tt><pre>".var_export($records, true) ."</pre></tt>";
 
- foreach($records as $record) {
+ /*$keys = array_keys($records);
+for($i = 0; $i < count($records); $i++) {
+    echo $keys[$i] . "{<br>";
+    foreach($records[$keys[$i]] as $key => $value) {
+        echo $key . " : " . $value . "<br>";
+    }
+    echo "}<br>";
+}*/
+            $db = Database::getInstance();
+            $mysqli = $db->getConnection();
+            $sql = "SELECT * FROM record WHERE patient_id = '$patientid'";
+            $result = $mysqli->query($sql);
+
+while($row = $result->fetch_array()) {
+  echo $row[0];
+  echo "<br/>";
+  echo $row[1];
+  echo "<br/>";
+  echo $row[2];
+  echo "<br/>";
+  echo $row[3];
+  echo "<br/>";
+  echo $row[4];
+  echo "<br/>";
+}
+
+ /*foreach($records as $record) {
    echo "<table>";
    echo  "<tr>";
    echo "<td>";
-    echo $record; 
+    echo $record[0]; 
     echo "</td>";
    echo "<td>";
-    echo $record; 
+    echo $record[1]; 
     echo "</td>";
    echo "<td>";
-  echo $record; 
+  echo $record[2]; 
   echo "</td>";
    echo "<td>";
-   echo $record->prescription;
+   echo $record[3];
    echo "</td>";
    echo "<td>";
-   echo $record->remarks;
+   echo $record[4];
    echo "</td>";
    echo "<td>";
-   echo $record->doctor_name; 
+   echo $record[5]; 
    echo "</td>";
    echo "<td>";
-   echo $record->hospital_name;
+   echo $record[6];
    echo "</td>";
  echo "</tr>";
    
    
    echo "</table>";
- }
+ }*/
 
 ?>
 
