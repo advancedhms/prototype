@@ -121,7 +121,7 @@ thead{
   <tbody>
   <?php
 
-				$sql="SELECT * FROM pat_rep";
+				$sql="SELECT * FROM pat_rep ORDER BY entry_date DESC";
 				$result=mysqli_query($mysqli,$sql);
 		
 				while($row=mysqli_fetch_array($result)){

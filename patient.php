@@ -4,7 +4,7 @@
   $patientid = $_SESSION['user_id'];
   $db = Database::getInstance();
   $mysqli = $db->getConnection();
-  $sql = "SELECT * FROM record WHERE patient_id = '$patientid' ORDER BY";
+  $sql = "SELECT pat_rep.bp, pat_rep.pulse, pat_rep.temp, pat_rep.height, pat_rep.weight, doctors_deduction.Disease, doctors_deduction.Prescription from pat_rep INNER JOIN doctors_deduction on pat_rep.patient_ID = doctors_deduction.Pat_ID WHERE pat_rep.patient_ID = '$patientid'";
   $result = $mysqli->query($sql);
 
 
@@ -104,8 +104,11 @@
               <h3 class="text-center text-info">Medical Records</h3>
               <thead class="thead-light">
                 <tr>
-                  <th scope="col">Temperature &#x2103</th>
                   <th scope="col">Blood Pressure mmHg</th>
+                  <th scope="col">Pulse</th>
+                  <th scope="col">Temperature &#x2103</th>
+                  <th scope="col">Height (inches)</th>
+                  <th scope="col">Weight (inches)</th>
                   <th scope="col">Diagnosis</th>
                   <th scope="col">Prescription</th>
                   <th scope="col">Remarks</th>
@@ -116,13 +119,13 @@
               <tbody>
             <?php while($record = $result->fetch_array()) { ?>
                 <tr>
+                  <td><?php echo $record[0]; ?></td>
                   <td><?php echo $record[1]; ?></td>
                   <td><?php echo $record[2]; ?></td>
                   <td><?php echo $record[3]; ?></td>
                   <td><?php echo $record[4]; ?></td>
                   <td><?php echo $record[5]; ?></td>
                   <td><?php echo $record[6]; ?></td>
-                  <td><?php echo $record[7]; ?></td>
                 </tr>
               <?php  } ?>
               </tbody>

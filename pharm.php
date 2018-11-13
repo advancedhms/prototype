@@ -139,19 +139,18 @@ $mysqli=mysqli_connect("localhost","root","","hms");
 						<tbody>
 							
 							<?php
-							$sql="SELECT * FROM doctors_deduction WHERE accepted='0'";
+							$sql="SELECT Pat_ID,Disease,Prescription,id FROM doctors_deduction WHERE accepted='0'";
 							$result=mysqli_query($mysqli,$sql);
 				
 							while($row=mysqli_fetch_array($result)){
-								$id=$row[0];
-								$patie_id=$row[2];
-								$dise=$row[3];
-								$prescr=$row[4];
+								$patie_id=$row[0];
+								$disea=$row[1];
+								$prescr=$row[2];
+								$id=$row[3];
 								
 								echo "<tr>";
 								echo "<td class=\"id\">".$id."</td>";
-								echo "<td class=\"patied\">".$patie_id."</td>";
-								echo "<td class=\"disease\">".$dise."</td>";
+								echo "<td class=\"disease\">".$disea."</td>";
 								echo "<td class=\"prescription\">".$prescr."</td>";
 								echo "<td >";
 								echo "<button class=\"accept btn btn-outline-success my-2 my-sm-0\" name=\"accept\" type=\"submit\">Accept</button>";
@@ -165,7 +164,7 @@ $mysqli=mysqli_connect("localhost","root","","hms");
 						
 						</table>
 						
-						<input type="hidden" name="id" id="outPut" >
+						<input type="text" name="id" id="outPut" >
 						</form>
 					<?php
 					
@@ -196,14 +195,14 @@ $mysqli=mysqli_connect("localhost","root","","hms");
 						</thead>
 						<tbody>
 							<?php
-							$sql="SELECT * FROM doctors_deduction WHERE accepted='1'";
+							$sql="SELECT Pat_ID,Disease,Prescription FROM doctors_deduction WHERE accepted='1'";
 							$result=mysqli_query($mysqli,$sql);
 				
 							while($row=mysqli_fetch_array($result)){
-								$id=$row[0];
-								$patie_id=$row[2];
-								$dise=$row[3];
-								$prescr=$row[4];
+							
+								$patie_id=$row[0];
+								$dise=$row[1];
+								$prescr=$row[2];
 								
 								echo "<tr>";
 								

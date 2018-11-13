@@ -27,6 +27,7 @@ for($i = 0; $i < count($records); $i++) {
             $mysqli = $db->getConnection();
             $sql = "SELECT * FROM record WHERE patient_id = '$patientid'";
             $result = $mysqli->query($sql);
+            echo date("Y-m-d H:i:s");
 
 while($row = $result->fetch_array()) {
   echo $row[0];

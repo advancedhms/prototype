@@ -82,11 +82,11 @@ display: block;
 </style>
 <?php
 $mysqli=mysqli_connect("localhost","root","","hms");
-$time=date('h:i:s');
+
 
 if(isset($_POST['save'])){
 	
-	$pateid=$_POST['pateid'];
+	$pateid=$_POST['patient'];
 	$bp=$_POST['bp'];
 	$pul=$_POST['pulse'];
 	$tempe=$_POST['tempe'];
@@ -95,10 +95,10 @@ if(isset($_POST['save'])){
 	
 	$wei=$_POST['wei'];
 	
-	$date=date("Y-m-d");
+	$date=date("Y-m-d H:i:s");
 	
 	//echo "$date";
-$sql="INSERT INTO pat_rep VALUES ($pateid,'$bp','$pul','$tempe','$hei','$wei','$date','$time')";
+$sql="INSERT INTO pat_rep VALUES ($pateid,'$bp','$pul','$tempe','$hei','$wei','$date')";
 
 $run=mysqli_query($mysqli,$sql);
 if($run){
@@ -167,7 +167,7 @@ else{
 <form method="post" >
     <div class="form-row">
     <div class="form-group col-md-6">
-	<input type="text" name="pateid" class="patient tt-query form-control" autocomplete = "off" spellcheck="false" id="patient" placeholder="Patient ID">
+	<input type="text" name="patient" class="patient tt-query form-control" autocomplete = "off" spellcheck="false" id="patient" placeholder="Patient ID">
     </div>
 
     <div class="form-group col-md-6">
