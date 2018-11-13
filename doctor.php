@@ -1,5 +1,5 @@
 <?php
-$mysqli=mysqli_connect("localhost","root","","cms");
+$mysqli=mysqli_connect("localhost","root","","hms");
 
 if(isset($_POST['send'])){
 	$docid=$_POST['docid'];

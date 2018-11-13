@@ -82,7 +82,7 @@ function openTab(evt, evtname) {
 }
 </style>
 <?php
-$mysqli=mysqli_connect("localhost","root","","cms");
+$mysqli=mysqli_connect("localhost","root","","hms");
 ?>
 
   <title>Pharmacist</title>

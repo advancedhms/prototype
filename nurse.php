@@ -36,14 +36,57 @@
 	width:100%;
 	
 }
+.tt-hint {
+
+display: block;
+  width: 100%;
+  height: calc(2.25rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+/*.tt-query {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}*/
+.tt-hint {
+  color: #999999;
+}
+.tt-dropdown-menu {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 12px;
+  padding: 8px 0;
+  width: 422px;
+}
+/*.tt-suggestion {
+  font-size: 24px;
+  line-height: 24px;
+  padding: 3px 20px;
+}*/
+.tt-suggestion.tt-is-under-cursor {
+  background-color: #0097CF;
+  color: #FFFFFF;
+}
+.tt-suggestion p {
+  margin: 0;
+}
 </style>
 <?php
-$mysqli=mysqli_connect("localhost","root","","cms");
+$mysqli=mysqli_connect("localhost","root","","hms");
 $time=date('h:i:s');
 
 if(isset($_POST['save'])){
 	
-	$pateid=$_POST['pateid'];
+	$pateid=$_POST['patient'];
 	$bp=$_POST['bp'];
 	$pul=$_POST['pulse'];
 	$tempe=$_POST['tempe'];
@@ -55,7 +98,7 @@ if(isset($_POST['save'])){
 	$date=date("Y-m-d");
 	
 	//echo "$date";
-$sql="INSERT INTO pat_rep VALUES ('$pateid','$bp','$pul','$tempe','$hei','$wei','$date','$time')";
+$sql="INSERT INTO pat_rep VALUES ($pateid,'$bp','$pul','$tempe','$hei','$wei','$date','$time')";
 
 $run=mysqli_query($mysqli,$sql);
 if($run){
@@ -76,10 +119,14 @@ else{
   <title>Nurse</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <title>Advanced Hospital Management System</title>
+    <link href="css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="fontawesome/css/all.css"
+          rel="stylesheet">
+    <link href="css/style.css"
+          rel="stylesheet">
+
 </head>
 <body>
 
@@ -119,7 +166,7 @@ else{
 						<br>
 <form method="post" >
 
-	<input type="text" class="col-md-2 form-control" name="pateid" placeholder="Patient Id">
+	<input type="text" name="patient" class="patient tt-query form-control" autocomplete = "off" spellcheck="false" id="patient" placeholder="Patient ID">
 	<br><br>
 	<input type="text" class="col-md-1 form-control" name="bp" placeholder="BP">
 	<br><br>
@@ -142,5 +189,25 @@ else{
         </div>
     </div>
 </div>  
+
+<script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/password.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="typeahead.min.js"></script>
+    <script>
+      $(document).ready(function(){
+    $('input.patient').typeahead({
+        name: 'patient',
+        remote:'ids.php?key=%QUERY',
+        limit : 10
+    });
+    $('input.doctor').typeahead({
+        name: 'doctor',
+        remote:'ids-doctor.php?key=%QUERY',
+        limit : 10
+    });
+});  
 </body>
 </html>
