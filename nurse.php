@@ -86,7 +86,7 @@ $time=date('h:i:s');
 
 if(isset($_POST['save'])){
 	
-	$pateid=$_POST['patient'];
+	$pateid=$_POST['pateid'];
 	$bp=$_POST['bp'];
 	$pul=$_POST['pulse'];
 	$tempe=$_POST['tempe'];
@@ -165,33 +165,41 @@ else{
 						<h2>FILL VITALS</h2>
 						<br>
 <form method="post" >
+    <div class="form-row">
+    <div class="form-group col-md-6">
+	<input type="text" name="pateid" class="patient tt-query form-control" autocomplete = "off" spellcheck="false" id="patient" placeholder="Patient ID">
+    </div>
 
-	<input type="text" name="patient" class="patient tt-query form-control" autocomplete = "off" spellcheck="false" id="patient" placeholder="Patient ID">
-	<br><br>
-	<input type="text" class="col-md-1 form-control" name="bp" placeholder="BP">
-	<br><br>
-	<input type="text" class="col-md-2 form-control" name="pulse" placeholder="Pulse">
-	<br><br>
-	<input type="text" class="col-md-2 form-control" name="tempe" placeholder="Temperature">
-	<br><br>
-	<div class="row">
-	<div class="col col-md-2 ">
+    <div class="form-group col-md-6">
+	<input type="text" class="tt-query form-control" name="bp" placeholder="BP">
+    </div>
+	
+    <div class="form-group col-md-6">
+	<input type="text" class="form-control" name="pulse" placeholder="Pulse">
+    </div>
+
+    <div class="form-group col-md-6">
+	<input type="text" class="form-control" name="tempe" placeholder="Temperature">
+    </div>
+
+    <div class="form-group col-md-6">
 	<input type="text" class="form-control" name="hei" placeholder="Height">
-	<br><br>
-	</div>
-	<div class="col col-md-2 ">
+    </div>
+
+    <div class="form-group col-md-6">
 	<input type="text" class=" form-control" name="wei" placeholder="Weight">
-	<br><br>
-	</div>
-	</div>
-	<input type="submit" class="col-md-1 form-control btn btn-outline-success" name="save" value="Save">
+    </div>
+
+    <div class="form-group col-md-6">
+	<input type="submit" class="form-control btn btn-outline-success" name="save" value="Save">
+    </div>
+    </div>
 </form>
         </div>
     </div>
 </div>  
 
 <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/password.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
@@ -209,5 +217,6 @@ else{
         limit : 10
     });
 });  
+</script>
 </body>
 </html>
