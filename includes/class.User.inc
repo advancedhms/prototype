@@ -190,7 +190,7 @@
         return true;
       }
 
-      $this->error_msg = 'Unable to register user';
+      $this->error_message = 'Unable to register user';
       return false;
     }
   }

@@ -1,6 +1,8 @@
 <?php
 session_start();
 $mysqli=mysqli_connect("localhost","root","","hms");
+$doctor = new Doctor;
+$doctorDetails = $doctor->getDetails($_SESSION['user_id']);
 
 if(isset($_POST['send'])){
 	$docid=$_POST['docid'];
@@ -89,7 +91,7 @@ thead{
 							
 						</div>
 						<br>
-						
+						<h1 class="display-4">Hello, <?php echo $doctorDetails['name'] ?>!</h1>
                         <a class="nav-item nav-link active px-3" href="#"><b>Home</b></a>
 						
                        <a href="#" class="nav-item nav-link active px-3 text-danger">Logout</a>
