@@ -1,4 +1,5 @@
 <?php
+session_start();
 $mysqli=mysqli_connect("localhost","root","","hms");
 
 if(isset($_POST['send'])){
@@ -155,10 +156,10 @@ thead{
 						</div>
 						<div class="modal-body">
 						<form method="post">
-						<input type="text" class="col-md-4 form-control" name="docid" placeholder="Doctor ID">
+						<input type="text" readonly class="col-md-4 form-control" name="docid" placeholder="Doctor ID" value = " <?php echo $_SESSION['user_id'] ?>">
 						<br>
 						<br>
-						<input type="text" id="patinp" class="col-md-4 form-control" name="patid" placeholder="Patient ID">
+						<input type="text" id="patinp" class="col-md-4 form-control" name="patid" placeholder="Patient ID" readonly>
 						<br><br>
 						<input type="text"  class="col-md-6 form-control" name="disease" placeholder="Disease">
 						<br><br>
