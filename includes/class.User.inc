@@ -13,7 +13,8 @@
     protected $_id;
     public $name;
     protected $_hospitalid;
-    protected $_db;       // stores the database handler
+    protected $_db;
+    public $user_status;       // stores the database handler
     protected $_user;     // stores the user data
     protected $_time_created; // Stores the time the user was created
     private static $_instance;
@@ -67,7 +68,7 @@
   *takes a property value and sets the value
   **/
   function __set($name, $value) {
-    if('id' == $name || 'password' == $name) {
+    if('id' == $name || 'password' == $name || 'user_status' == $name) {
       $this->$name = $value;
       return;
     }
@@ -83,7 +84,10 @@
         if ($user) {
             $this->_user = $user; // store it so it can be accessed later
             $_SESSION['user_id'] = $user['user_id'];
-            return $user['user_id'];
+            return array(
+              'user_id' => $user['user_id'],
+              'user_status' => $user['user_status'],
+            );
         }
 
         return false;
@@ -176,8 +180,9 @@
 
       $user_id = $this->_id;
       $password = $this->_password;
+      $user_status = $this->user_status;
       $sql = "INSERT INTO users "
-      . "VALUES ('$user_id', '$password') ";
+      . "VALUES ('$user_id', '$password', $user_status) ";
 
 
       if($mysqli->query($sql)) {

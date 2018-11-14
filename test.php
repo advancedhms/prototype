@@ -11,7 +11,7 @@ include_once 'includes/classes.php';
   $admin = new Admin;
   $adminDetails = $admin->getDetails($_SESSION['user_id']);
 
-
+/*
   if(isset($_POST['submitPatient'])) {
       echo "this is a test";
     $userid = intval($_POST['patient']);
@@ -34,5 +34,43 @@ include_once 'includes/classes.php';
   }
   
 
+*/
 
+$user_id = 1005;
+$password = 'kuiler';
+$error = " ";
+$user = new User(array(
+  'id' => $user_id,
+  'password' => $password,
+));
+$userinfo = array();
+$userinfo = $user->login();
+
+if($userinfo) {
+  if($userinfo['user_status'] == 3) {
+    $_SESSION['user_id'] = $userinfo['user_id'];
+    header('Location: patient.php');
+  }
+  elseif ($userinfo['user_status'] == 1) {
+    $_SESSION['user_id'] = $userinfo['user_id'];
+    header('Location: admin.php');
+  }
+  elseif ($userinfo['user_status'] == 2) {
+    $_SESSION['user_id'] = $userinfo['user_id'];
+    header('Location: doctor.php');
+  }
+  elseif ($userinfo['user_status'] == 4) {
+    $_SESSION['user_id'] = $userinfo['user_id'];
+    header('Location: pharm.html');
+  }
+  else {
+    header('Location: index.php');
+  }
+
+}
+else {
+  echo "<span>$user->error_message</span>";
+  $doc = new DOMDocument();
+  $a = $doc->getElementById('error');
+}
  ?>

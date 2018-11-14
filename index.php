@@ -21,24 +21,28 @@ include 'includes/class.' . $class_name . '.inc';
       'id' => $user_id,
       'password' => $password,
     ));
+    $userinfo = array();
     $userinfo = $user->login();
 
     if($userinfo) {
-      if(preg_match('/pat$/', $userinfo)) {
-        $_SESSION['user_id'] = $userinfo;
+      if($userinfo['user_status'] == 3) {
+        $_SESSION['user_id'] = $userinfo['user_id'];
         header('Location: patient.php');
       }
-      elseif (preg_match('/admin$/', $userinfo)) {
-        $_SESSION['user_id'] = $userinfo;
+      elseif ($userinfo['user_status'] == 1) {
+        $_SESSION['user_id'] = $userinfo['user_id'];
         header('Location: admin.php');
       }
-      elseif (preg_match('/pharm$/', $userinfo)) {
-        $_SESSION['user_id'] = $userinfo;
+      elseif ($userinfo['user_status'] == 2) {
+        $_SESSION['user_id'] = $userinfo['user_id'];
+        header('Location: doctor.php');
+      }
+      elseif ($userinfo['user_status'] == 4) {
+        $_SESSION['user_id'] = $userinfo['user_id'];
         header('Location: pharm.html');
       }
       else {
-        $_SESSION['user_id'] = $userinfo;
-        header('Location: patient.php');
+        header('Location: index.php');
       }
 
     }

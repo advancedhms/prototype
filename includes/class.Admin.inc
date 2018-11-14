@@ -102,6 +102,7 @@ class Admin{
     $usernew = new User(array(
       'id' => $patient_id,
       'password' => $password,
+      'user_status' => 3,
     ));
     $user = $usernew->_checkCredentials($patient_id, $password);
     if(!$user) {
@@ -122,6 +123,7 @@ class Admin{
     $usernew = new User(array(
       'id' => $doctor_id,
       'password' => $password,
+      'user_status' => 2,
     ));
     $user = $usernew->_checkCredentials($doctor_id, $password);
     if(!$user) {
