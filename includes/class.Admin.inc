@@ -121,8 +121,8 @@ class Admin{
   }
   public function register_Doctor($doctor_id, $password) {
     $usernew = new User(array(
-      'id' => $doctor_id,
-      'password' => $password,
+      'id' => "$doctor_id",
+      'password' => "$password",
       'user_status' => 2,
     ));
     $user = $usernew->_checkCredentials($doctor_id, $password);
@@ -130,8 +130,7 @@ class Admin{
       $doctor = new Doctor;
       $flag = $doctor->ValidateID($doctor_id);
       if($flag) {
-        return $user->Register($user);
-
+        return $usernew->saveUser();
       }
       else {
         $error_msg = "DoctorID does not exist in the system";

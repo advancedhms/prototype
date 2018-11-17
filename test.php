@@ -34,7 +34,7 @@ include_once 'includes/classes.php';
   }
   
 
-*/
+
 
 $user_id = 1005;
 $password = 'kuiler';
@@ -72,5 +72,16 @@ else {
   echo "<span>$user->error_message</span>";
   $doc = new DOMDocument();
   $a = $doc->getElementById('error');
+}*/
+
+
+$admin = new Admin;
+$Doctor = new Doctor;
+$user_id = "10264985";
+$password = 'juilersa';
+
+$user = $Doctor->ValidateID($user_id);
+if($user) {
+  echo "Successful";
 }
  ?>

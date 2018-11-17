@@ -44,15 +44,12 @@ class Doctor{
     }
 
     function ValidateID ($id = '') {
-        if($id = ''){
-            $id = $this->doctor_id;
-        }
         $db = Database::getInstance();
 			$mysqli = $db->getConnection();
 			$sql = "SELECT * FROM doctor WHERE doctor_id = '$id'";
 			$result = $mysqli->query($sql);
 			if($row = $result->fetch_assoc()) {
-				return true;
+				return TRUE;
 			}
 			trigger_error('Unable to locate user with id: '.$id);
 			return false;

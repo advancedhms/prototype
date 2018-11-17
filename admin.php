@@ -17,7 +17,7 @@ include_once 'includes/classes.php';
     $password = ($_POST['patientPassword']);
     $patient = $admin->register_Patient($userid, $password);
     if($patient) {
-      //mail($admin_email, "$subject", $comment, "From:" . $email);
+      echo "<script> alert('Patient account successfully created'); </script>";
     }
   }
   elseif (isset($_POST['submitDoctor'])) {
