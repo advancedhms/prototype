@@ -17,7 +17,17 @@ include_once 'includes/classes.php';
     $password = ($_POST['patientPassword']);
     $patient = $admin->register_Patient($userid, $password);
     if($patient) {
-      echo "<script> alert('Patient account successfully created'); </script>";
+      $pat = new Patient;
+      $patientDetails = $pat->getDetails($userid);
+      $to = $patientDetails['email'];
+      $subject = "Account Details";
+      $message = "Hello ". $patientDetails['name'];
+      $message .= "! /n Below, you can find your temporary password. Please visit www.ahms.com to login your with patient id and the password. You can change it in your Account settings.  /n";
+      $message .= "$password";
+
+      $headers = "From: Advanced Hospital Group";
+      mail($to,$subject,$message,$headers);
+      echo "<script> alert('Patient account successfully created. Login details have been sent to Patient'); </script>";
     }
   }
   elseif (isset($_POST['submitDoctor'])) {

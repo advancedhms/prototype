@@ -149,5 +149,17 @@
 			return false;
 		  }
 	}
+
+	function getDetails($id = '') {
+		if($id == '') {
+		 $id = $this->patient_id;
+		}
+		$db = Database::getInstance();
+		$mysqli = $db->getConnection();
+		$sql = "SELECT * FROM patient WHERE patient_id = '$id'";
+	  
+		$result = $mysqli->query($sql);
+		return $result->fetch_assoc();
+	  }
 	
 ?>
