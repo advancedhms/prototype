@@ -61,7 +61,7 @@ class Doctor{
         }
         $db = Database::getInstance();
         $mysqli = $db->getConnection();
-        $sql = "SELECT * FROM doctor WHERE username = '$id'";
+        $sql = "SELECT * FROM doctor WHERE doctor_id = '$id'";
       
         $result = $mysqli->query($sql);
         return $result->fetch_assoc();

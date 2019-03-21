@@ -3,7 +3,7 @@
    *
    */
    /*include 'class.Database.inc';
-   include 'class.Admin.inc';
+    include 'class.Admin.inc';
    include 'class.Hospital.inc';*/
   class User
   {

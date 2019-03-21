@@ -1,4 +1,5 @@
 <?php
+  include_once 'includes/classes.php';
 session_start();
 $mysqli=mysqli_connect("localhost","root","","hms");
 $doctor = new Doctor;
